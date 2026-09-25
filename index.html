@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Huerto de Edén">
+  <title>Salmo 45:9 & Cantar de los Cantares 5 - Huerto de Edén</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-main: #ffffff;
+      --bg-surface: #f8fafc;
+      --bg-card: #ffffff;
+      
+      /* Colores del logo Huerto de Edén */
+      --navy-primary: #233142;
+      --navy-dark: #16202c;
+      --navy-light: #324458;
+      --gold-primary: #e69d1b;
+      --gold-hover: #c9840e;
+      --gold-light: #fef3c7;
+      --gold-subtle: rgba(230, 157, 27, 0.12);
+      --gold-glow: rgba(230, 157, 27, 0.3);
+      
+      --border-light: #e2e8f0;
+      --border-subtle: #edf2f7;
+      --border-active: #e69d1b;
+      
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+      
+      --hebrew-font: 'Frank Ruhl Libre', 'David Libre', 'Times New Roman', serif;
+      --sans-font: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      background: var(--bg-main);
+      color: var(--text-primary);
+      font-family: var(--sans-font);
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Ambient Subtle Background Pattern */
+    .bg-pattern {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(35, 49, 66, 0.04) 1px, transparent 1px);
+      background-size: 26px 26px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Header Bar */
+    header {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 36px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+    }
+    .header-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .header-logo {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06));
+    }
+
+    /* Slide Deck Container */
+    .deck-container {
+      position: relative;
+      flex: 1;
+      overflow: hidden;
+      z-index: 5;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.99) translateY(6px);
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  visibility 0.35s;
+      padding: 16px 40px;
+      display: flex;
+      flex-direction: column;
+    }
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1) translateY(0);
+    }
+
+    /* SLIDE 1: CATEDRAL DE SMOLENSK & SALMO 45:9 */
+    .art-slide {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 8px 30px;
+    }
+    .art-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-width: 900px;
+      margin: 0 auto;
+      height: 100%;
+    }
+    .art-image-wrapper {
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    .art-image {
+      max-height: 57vh;
+      width: auto;
+      border-radius: 12px;
+      box-shadow: 0 16px 36px -8px rgba(35, 49, 66, 0.22);
+      border: 1px solid var(--border-light);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .art-image:hover {
+      transform: scale(1.012);
+      box-shadow: 0 20px 42px -6px rgba(35, 49, 66, 0.3);
+    }
+    .art-text-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      max-width: 760px;
+    }
+    .art-main-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--navy-primary);
+      letter-spacing: -0.01em;
+    }
+    .art-hebrew-verse {
+      font-family: var(--hebrew-font);
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--gold-primary);
+      direction: rtl;
+      letter-spacing: 0.02em;
+      line-height: 1.25;
+    }
+    .art-explanation {
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--text-secondary);
+      max-width: 720px;
+      margin: 0 auto;
+      font-weight: 400;
+    }
+    .art-figures {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin: 1px auto;
+    }
+    .art-meta-footer {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 10.5px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-light);
+      padding-top: 4px;
+      margin-top: 2px;
+    }
+    .art-work-title {
+      font-weight: 700;
+      color: var(--navy-primary);
+    }
+    .art-artist {
+      font-style: italic;
+    }
+    .art-bullet {
+      color: var(--text-dim);
+    }
+    .art-year {
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    /* SLIDE 2: MINIMAL INTERACTIVE SYNC (Centered layout) */
+    .interactive-slide {
+      display: flex;
+      flex-direction: row;
+      gap: 48px;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 24px;
+    }
+
+    /* Left Column: Centered Video */
+    .video-column {
+      flex: 0 0 45%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+    .video-card {
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 14px 34px -10px rgba(35, 49, 66, 0.12);
+    }
+    .video-viewport {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      cursor: pointer;
+    }
+    .video-viewport video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(22, 32, 44, 0.4);
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+    .play-overlay.hidden {
+      opacity: 0;
+    }
+    .play-overlay-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--gold-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(230, 157, 27, 0.5);
+      transition: transform 0.2s ease;
+    }
+    .video-viewport:hover .play-overlay-icon {
+      transform: scale(1.08);
+    }
+
+    /* Video Controls */
+    .video-controls-bar {
+      padding: 14px 18px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: var(--border-light);
+      border-radius: 3px;
+      cursor: pointer;
+      position: relative;
+    }
+    .progress-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 0%;
+      background: var(--gold-primary);
+      border-radius: 3px;
+    }
+    .controls-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .playback-btns {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .icon-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      color: var(--navy-primary);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .icon-btn:hover {
+      background: #ffffff;
+      border-color: var(--navy-primary);
+    }
+    .icon-btn.primary {
+      background: var(--navy-primary);
+      color: #ffffff;
+      border-color: transparent;
+      width: 40px;
+      height: 40px;
+    }
+    .icon-btn.primary:hover {
+      background: var(--gold-primary);
+    }
+    .time-badge {
+      font-size: 13px;
+      font-family: monospace;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    /* Right Column: Clean Open Typography Area (Centered, No Boxes) */
+    .sync-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      padding: 0 10px;
+    }
+
+    .verse-content-box {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .verse-content-box.fading {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+
+    /* Clean Verse Reference Header */
+    .verse-reference-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--border-subtle);
+      padding-bottom: 12px;
+    }
+    .verse-ref-tag {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--navy-primary);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .verse-ref-tag::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold-primary);
+    }
+
+    /* Hebrew Vocalized Text (Clean & Open) */
+    .hebrew-main-text {
+      font-family: var(--hebrew-font);
+      direction: rtl;
+      text-align: right;
+      font-size: 35px;
+      line-height: 1.7;
+      color: var(--navy-primary);
+      letter-spacing: 0.01em;
+      padding: 4px 0;
+    }
+    /* Word highlighting */
+    .sync-word {
+      display: inline-block;
+      padding: 0 4px;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+    }
+    .sync-word.word-active {
+      background: var(--gold-primary);
+      color: #ffffff;
+      font-weight: 800;
+      box-shadow: 0 2px 10px rgba(230, 157, 27, 0.4);
+      transform: scale(1.04);
+    }
+    .sync-word.word-passed {
+      color: #b45309;
+    }
+
+    /* Phonetic Line (Direct, Clean) */
+    .phonetic-text {
+      font-size: 17px;
+      color: #b45309;
+      font-style: italic;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    /* Spanish Translation Line (Direct, Clean) */
+    .spanish-text {
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--navy-primary);
+      font-weight: 600;
+      border-left: 4px solid var(--gold-primary);
+      padding-left: 16px;
+      margin-top: 2px;
+    }
+
+    /* Navigation Footer Bar */
+    footer {
+      position: relative;
+      z-index: 10;
+      padding: 12px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      border-top: 1px solid var(--border-light);
+      box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.02);
+    }
+    .footer-left {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      max-width: 42%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .biblical-credit {
+      font-weight: 500;
+      color: var(--text-muted);
+      font-size: 12px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      transition: opacity 0.2s ease;
+    }
+    .footer-separator {
+      color: var(--border-light);
+    }
+    .kbd-shortcut {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-surface);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-family: monospace;
+      border: 1px solid var(--border-light);
+      color: var(--navy-primary);
+      font-weight: 600;
+    }
+    .slide-dots {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border-light);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dot.active {
+      background: var(--navy-primary);
+      width: 26px;
+      border-radius: 12px;
+    }
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-arrow-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      color: var(--navy-primary);
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .nav-arrow-btn:hover:not(:disabled) {
+      background: var(--navy-primary);
+      color: #ffffff;
+      border-color: var(--navy-primary);
+    }
+    .nav-arrow-btn:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+    }
+
+    /* Modal / Tooltip */
+    .keyboard-hint {
+      position: fixed;
+      bottom: 60px;
+      right: 36px;
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      padding: 16px 20px;
+      border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(35, 49, 66, 0.15);
+      font-size: 13px;
+      color: var(--text-primary);
+      display: none;
+      z-index: 100;
+    }
+    .keyboard-hint.visible {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-pattern"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-center">
+      <img src="logoHE.png" alt="Huerto de Edén" class="header-logo">
+    </div>
+  </header>
+
+  <!-- Presentation Deck -->
+  <div class="deck-container">
+
+    <!-- SLIDE 1: CATEDRAL DE SMOLENSK & SALMO 45:9 -->
+    <div class="slide art-slide active" id="slide-0">
+      <div class="art-container">
+        
+        <div class="art-image-wrapper" id="artImageWrapper" title="Haz clic o presiona 'Siguiente' para ver la lectura interactiva">
+          <img src="smolensk_1676.jpg" alt="«La Reina se apostó a tu diestra», 1676 - Nikita Pavlovets" class="art-image">
+        </div>
+
+        <div class="art-text-block">
+          <h2 class="art-main-title">«La Reina se apostó a tu diestra»</h2>
+          <div class="art-hebrew-verse">נִצְּבָה שֵׁגַל לִימִינְךָ בְּכֶתֶם אוֹפִיר׃</div>
+          
+          <p class="art-explanation">
+            Pintura basada en El Salmo nupcial (Salmo 45:9) refleja la iconografía del canto para las bodas reales de los reyes de Israel. “La reina está a tu diestra con oro de Ofir”. De fondo el amigo del novio acompaña las nupcias.
+          </p>
+
+          <div class="art-figures">
+            En el cuadro: Cristo, La Iglesia y Juan el Bautista
+          </div>
+
+          <div class="art-meta-footer">
+            <span class="art-artist">Nikita Pávlovets</span>
+            <span class="art-bullet">•</span>
+            <span class="art-work-title">Catedral de Smolensk (Moscú)</span>
+            <span class="art-bullet">•</span>
+            <span class="art-year">1676</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SLIDE 2: MINIMAL INTERACTIVE VIDEO & CURRENT VERSE (CANTARES 5:2 - 5:16) -->
+    <div class="slide interactive-slide" id="slide-1">
+      
+      <!-- Left Column: Centered Video Player -->
+      <div class="video-column">
+        <div class="video-card">
+          <div class="video-viewport" id="videoViewport">
+            <video id="hebrewVideo" preload="auto" playsinline>
+              <source src="video.mp4" type="video/mp4">
+              Tu navegador no soporta video HTML5.
+            </video>
+            <div class="play-overlay" id="playOverlay">
+              <div class="play-overlay-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Controls -->
+          <div class="video-controls-bar">
+            <div class="progress-track" id="progressTrack">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="controls-row">
+              <div class="playback-btns">
+                <button class="icon-btn primary" id="btnPlayPause" title="Reproducir / Pausar (Espacio)">
+                  <svg id="playIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  <svg id="pauseIcon" style="display:none;" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                </button>
+                <button class="icon-btn" id="btnRewind" title="Retroceder 5s (←)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/></svg>
+                </button>
+                <button class="icon-btn" id="btnForward" title="Avanzar 5s (→)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 17l5-5-5-5M6 17l5-5-5-5"/></svg>
+                </button>
+              </div>
+
+              <div class="time-badge" id="timeDisplay">00:00 / 04:06</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Pure Clean Text (Current Verse in Place) -->
+      <div class="sync-column">
+        <div class="verse-content-box" id="activeVerseBox">
+          
+          <!-- Clean Verse Reference Header -->
+          <div class="verse-reference-row">
+            <div class="verse-ref-tag" id="activeVerseRef">Cantar de los Cantares 5:2</div>
+          </div>
+
+          <!-- Hebrew vocalized with synchronized words -->
+          <div class="hebrew-main-text" id="activeHebrewContainer">
+            <!-- Hebrew words injected here -->
+          </div>
+
+          <!-- Phonetic pronunciation -->
+          <div class="phonetic-text" id="activePhonetic">Aní yeshenáh ve-libí er...</div>
+
+          <!-- Spanish translation -->
+          <div class="spanish-text" id="activeSpanish">Yo dormía, pero mi corazón velaba...</div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer Navigation -->
+  <footer>
+    <div class="footer-left">
+      <span class="biblical-credit" id="slideFooterText">Iconografía: Salmo 45:9 • Catedral de Smolensk (1676)</span>
+    </div>
+
+    <div class="slide-dots" id="dotsContainer">
+      <div class="dot active" data-slide="0"></div>
+      <div class="dot" data-slide="1"></div>
+    </div>
+
+    <div class="footer-right">
+      <button class="nav-arrow-btn" id="btnPrevSlide" title="Diapositiva anterior" disabled>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="nav-arrow-btn" id="btnNextSlide" title="Siguiente diapositiva">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </footer>
+
+  <!-- Quick Keyboard Shortcuts Modal Hint -->
+  <div class="keyboard-hint" id="keyboardHint">
+    <div style="font-weight:700; margin-bottom:8px; color: var(--navy-primary);">Atajos de teclado:</div>
+    <div>• <strong>Espacio / Clic</strong>: Avanzar diapositiva (o Reproducir / Pausar video en Diapositiva 2)</div>
+    <div>• <strong>← / →</strong>: +/- 5s en el video (o cambiar diapositiva)</div>
+    <div>• <strong>PageDown / PageUp</strong>: Avanzar / retroceder diapositiva</div>
+    <div>• <strong>F</strong>: Pantalla completa</div>
+    <div>• <strong>Esc</strong>: Cerrar ventana de ayuda</div>
+  </div>
+
+  <script>
+    /* Complete Data Definition for Shir HaShirim 5:2 - 5:16 */
+    const VERSES_DATA = [
+      {
+        id: "v-5-2",
+        ref: "Cantar de los Cantares 5:2",
+        shortRef: "5:2",
+        start: 1.20,
+        end: 33.00,
+        hebrew: "אֲנִי יְשֵׁנָה וְלִבִּי עֵר קוֹל דּוֹדִי דוֹפֵק פִּתְחִי־לִי אֲחֹתִי רַעְיָתִי יוֹנָתִי תַמָּתִי שֶׁרֹּאשִׁי נִמְלָא־טָל קְוֻּצּוֹתַי רְסִיסֵי לָיְלָה׃",
+        phonetic: "Aní yeshenáh ve-libí er; kol dodí dofék: «Pítji-li ajotí, ra'yatí, yonatí, tamatí, she-roshí nimlá-tal, kevutsotái resiséi láylah».",
+        spanish: "Yo dormía, pero mi corazón velaba. ¡La voz de mi amado que llama!: «Ábreme, hermana mía, compañera mía, paloma mía, perfecta mía; porque mi cabeza está llena de rocío, mis cabellos de las gotas de la noche»."
+      },
+      {
+        id: "v-5-3",
+        ref: "Cantar de los Cantares 5:3",
+        shortRef: "5:3",
+        start: 33.00,
+        end: 50.90,
+        hebrew: "פָּשַׁטְתִּי אֶת־כֻּתָּנְתִּי אֵיכָכָה אֶלְבָּשֶׁנָּה רָחַצְתִּי אֶת־רַגְלַי אֵיכָכָה אֲטַנְּפֵם׃",
+        phonetic: "Pashátti et-kuttantí, eikhákhah elbashénnah? Rajátsti et-ragláy, eikhákhah atanefém?",
+        spanish: "«Me he despojado de mi túnica; ¿cómo la he de vestir? He lavado mis pies; ¿cómo los he de ensuciar?»."
+      },
+      {
+        id: "v-5-4",
+        ref: "Cantar de los Cantares 5:4",
+        shortRef: "5:4",
+        start: 50.90,
+        end: 63.00,
+        hebrew: "דּוֹדִי שָׁלַח יָדוֹ מִן־הַחֹר וּמֵעַי הָמוּ עָלָיו׃",
+        phonetic: "Dodí shaláj yadó min-hajor, u-me'ái hamú alav.",
+        spanish: "Mi amado metió su mano por la abertura, y mis entrañas se conmovieron por él."
+      },
+      {
+        id: "v-5-5",
+        ref: "Cantar de los Cantares 5:5",
+        shortRef: "5:5",
+        start: 63.00,
+        end: 83.10,
+        hebrew: "קַמְתִּי אֲנִי לִפְתֹּחַ לְדוֹדִי וְיָדַי נָטְפוּ־מוֹר וְאֶצְבְּעֹתַי מוֹר עֹבֵר עַל כַּפּוֹת הַמַּנְעוּל׃",
+        phonetic: "Kámti aní liftóaj le-dodí, ve-yadái natfú-mor, ve-etsbe'otái mor ovér al kapót ha-man'ul.",
+        spanish: "Yo me levanté para abrir a mi amado, y mis manos gotearon mirra, y mis dedos mirra líquida sobre las manijas del cerrojo."
+      },
+      {
+        id: "v-5-6",
+        ref: "Cantar de los Cantares 5:6",
+        shortRef: "5:6",
+        start: 83.10,
+        end: 105.70,
+        hebrew: "פָּתַחְתִּי אֲנִי לְדוֹדִי וְדוֹדִי חָמַק עָבָר נַפְשִׁי יָצְאָה בְדַבְּרוֹ בִּקַּשְׁתִּיהוּ וְלֹא מְצָאתִיהוּ קְרָאתִיו וְלֹא עָנָנִי׃",
+        phonetic: "Patájti aní le-dodí, ve-dodí jamák avár; nafshí yats'áh ve-daberó, bikashtíhu ve-lo metsatíhu, keratív ve-lo anáni.",
+        spanish: "Abrí yo a mi amado, pero mi amado se había ido, ya había pasado; mi alma desfalleció cuando habló. Lo busqué y no lo hallé; lo llamé y no me respondió."
+      },
+      {
+        id: "v-5-7",
+        ref: "Cantar de los Cantares 5:7",
+        shortRef: "5:7",
+        start: 105.70,
+        end: 125.40,
+        hebrew: "מְצָאֻנִי הַשֹּׁמְרִים הַסֹּבְבִים בָּעִיר הִכּוּנִי פְצָעוּנִי נָשְׂאוּ אֶת־רְדִידִי מֵעָלַי שֹׁמְרֵי הַחֹמוֹת׃",
+        phonetic: "Metsa'úni ha-shomerím ha-sovevím ba'ír, hikúni, fetsa'úni; nas'ú et-redidí me'alái shomeréi ha-jomot.",
+        spanish: "Me hallaron los guardas que rondan la ciudad; me golpearon, me hirieron; me despojaron de mi velo los guardas de los muros."
+      },
+      {
+        id: "v-5-8",
+        ref: "Cantar de los Cantares 5:8",
+        shortRef: "5:8",
+        start: 125.40,
+        end: 140.10,
+        hebrew: "הִשְׁבַּעְתִּי אֶתְכֶם בְּנוֹת יְרוּשָׁלָ‍ִם אִם־תִּמְצְאוּ אֶת־דּוֹדִי מַה־תַּגִּידוּ לוֹ שֶׁחוֹלַת אַהֲבָה אָנִי׃",
+        phonetic: "Hishbá'ti etjém, benot Yerushaláyim, im-timtse'ú et-dodí, mah-taguídu lo? She-jolat ahaváh áni.",
+        spanish: "Yo les conjuro, oh hijas de Jerusalén, que si hallan a mi amado, le digan que desfallezco de amor."
+      },
+      {
+        id: "v-5-9",
+        ref: "Cantar de los Cantares 5:9",
+        shortRef: "5:9",
+        start: 140.10,
+        end: 154.10,
+        hebrew: "מַה־דּוֹדֵךְ מִדּוֹד הַיָּפָה בַּנָּשִׁים מַה־דּוֹדֵךְ מִדּוֹד שֶׁכָּכָה הִשְׁבַּעְתָּנוּ׃",
+        phonetic: "Mah-dodéj mi-dod, hayafáh banashím? Mah-dodéj mi-dod, she-kájah hishba'tánu?",
+        spanish: "«¿Qué es tu amado más que otro amado, oh la más hermosa entre las mujeres? ¿Qué es tu amado más que otro amado, para que así nos conjures?»."
+      },
+      {
+        id: "v-5-10",
+        ref: "Cantar de los Cantares 5:10",
+        shortRef: "5:10",
+        start: 154.10,
+        end: 162.70,
+        hebrew: "דּוֹדִי צַח וְאָדוֹם דָּגוּל מֵרְבָבָה׃",
+        phonetic: "Dodí tsaj ve-adóm, dagúl me-revaváh.",
+        spanish: "«Mi amado es resplandeciente y sonrosado, distinguido entre diez mil."
+      },
+      {
+        id: "v-5-11",
+        ref: "Cantar de los Cantares 5:11",
+        shortRef: "5:11",
+        start: 162.70,
+        end: 171.60,
+        hebrew: "רֹאשׁוֹ כֶּתֶם פָּז קְוּצּוֹתָיו תַּלְתַּלִּים שְׁחֹרוֹת כָּעוֹרֵב׃",
+        phonetic: "Roshó kétem paz; kevutsotáv taltalím, shejorót ka-orév.",
+        spanish: "Su cabeza es como el oro más puro; sus cabellos crespos, negros como el cuervo."
+      },
+      {
+        id: "v-5-12",
+        ref: "Cantar de los Cantares 5:12",
+        shortRef: "5:12",
+        start: 171.60,
+        end: 187.90,
+        hebrew: "עֵינָיו כְּיוֹנִים עַל־אֲפִיקֵי מָיִם רֹחֲצוֹת בֶּחָלָב יֹשְׁבוֹת עַל־מִלֵּאת׃",
+        phonetic: "Eináv ke-yoním al-afikéi máyim, rojatsót ba-jaláv, yoshevót al-millét.",
+        spanish: "Sus ojos son como palomas junto a corrientes de aguas, lavados con leche, colocados a la perfección."
+      },
+      {
+        id: "v-5-13",
+        ref: "Cantar de los Cantares 5:13",
+        shortRef: "5:13",
+        start: 187.90,
+        end: 206.10,
+        hebrew: "לְחָיָו כַּעֲרוּגַת הַבֹּשֶׂם מִגְדְּלוֹת מֶרְקָחִים שִׂפְתוֹתָיו שׁוֹשַׁנִּים נֹטְפוֹת מוֹר עֹבֵר׃",
+        phonetic: "Lejayáv ka-arugát ha-bósem, migdelót merkajím; siftotáv shoshaním, notfót mor ovér.",
+        spanish: "Sus mejillas, como una era de especias, como torres de hierbas aromáticas; sus labios, como lirios que destilan mirra líquida."
+      },
+      {
+        id: "v-5-14",
+        ref: "Cantar de los Cantares 5:14",
+        shortRef: "5:14",
+        start: 206.10,
+        end: 221.80,
+        hebrew: "יָדָיו גְּלִילֵי זָהָב מְמֻלָּאִים בַּתַּרְשִׁישׁ מֵעָיו עֶשֶׁת שֵׁן מְעֻלֶּפֶת סַפִּירִים׃",
+        phonetic: "Yadáiv geliléi zaháv, memula'ím ba-tarshísh; me'áv éshet shen, me'uléfet sapirím.",
+        spanish: "Sus manos, como cilindros de oro engastados de piedras preciosas; su cuerpo, como marfil pulido recubierto de zafiros."
+      },
+      {
+        id: "v-5-15",
+        ref: "Cantar de los Cantares 5:15",
+        shortRef: "5:15",
+        start: 221.80,
+        end: 230.50,
+        hebrew: "שׁוֹקָיו עַמּוּדֵי שֵׁשׁ מְיֻסָּדִים עַל־אַדְנֵי־פָז מַרְאֵהוּ כַּלְּבָנוֹן בָּחוּר כָּאֲרָזִים׃",
+        phonetic: "Shokáv amudéi shesh, meyusadím al-adnéi-faz; mar'éhu ka-Levanón, bajúr ka-arazím.",
+        spanish: "Sus piernas, columnas de mármol asentadas sobre basas de oro puro; su porte, como el Líbano, imponente como los cedros."
+      },
+      {
+        id: "v-5-16",
+        ref: "Cantar de los Cantares 5:16",
+        shortRef: "5:16",
+        start: 230.50,
+        end: 246.00,
+        hebrew: "חִכּוֹ מַמְתַקִּים וְכֻלּוֹ מַחֲמַדִּים זֶה דוֹדִי וְזֶה רֵעִי בְּנוֹת יְרוּשָׁלָ‍ִם׃",
+        phonetic: "Jikó mamtakím, ve-juló majamadím. Zeh dodí ve-zeh re'í, benot Yerushaláyim».",
+        spanish: "Su paladar, dulcísimo, y todo él codiciable. ¡Tal es mi amado, tal es mi amigo, oh hijas de Jerusalén!»."
+      }
+    ];
+
+    // Pre-calculate word spans and timings for each verse
+    VERSES_DATA.forEach(v => {
+      const rawWords = v.hebrew.split(' ').filter(w => w.trim());
+      const totalDur = v.end - v.start;
+      const wordDur = totalDur / rawWords.length;
+      v.words = rawWords.map((w, idx) => ({
+        word: w,
+        start: v.start + (idx * wordDur),
+        end: v.start + ((idx + 1) * wordDur)
+      }));
+    });
+
+    /* DOM Elements */
+    const video = document.getElementById('hebrewVideo');
+    const videoViewport = document.getElementById('videoViewport');
+    const playOverlay = document.getElementById('playOverlay');
+    const btnPlayPause = document.getElementById('btnPlayPause');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+    const btnRewind = document.getElementById('btnRewind');
+    const btnForward = document.getElementById('btnForward');
+    const progressTrack = document.getElementById('progressTrack');
+    const progressFill = document.getElementById('progressFill');
+    const timeDisplay = document.getElementById('timeDisplay');
+
+    /* Active Verse Elements */
+    const activeVerseBox = document.getElementById('activeVerseBox');
+    const activeVerseRef = document.getElementById('activeVerseRef');
+    const activeHebrewContainer = document.getElementById('activeHebrewContainer');
+    const activePhonetic = document.getElementById('activePhonetic');
+    const activeSpanish = document.getElementById('activeSpanish');
+    const artImageWrapper = document.getElementById('artImageWrapper');
+
+    let displayedVerseIndex = -1;
+
+    /* Deck Slides Elements */
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const slideFooterText = document.getElementById('slideFooterText');
+    const btnPrevSlide = document.getElementById('btnPrevSlide');
+    const btnNextSlide = document.getElementById('btnNextSlide');
+    const keyboardHint = document.getElementById('keyboardHint');
+
+    const SLIDE_FOOTER_TEXTS = [
+      'Iconografía: Salmo 45:9 • Catedral de Smolensk (1676)',
+      'Lectura bíblica: Rabino Weisblum • Nósuaj Ashkenaz (Cantares 5:2-16)'
+    ];
+
+    /* Format Seconds to MM:SS */
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    /* Display Verse in Place (with subtle transition) */
+    function setDisplayedVerse(index) {
+      if (displayedVerseIndex === index) return;
+      displayedVerseIndex = index;
+      const v = VERSES_DATA[index];
+
+      // Quick smooth transition
+      activeVerseBox.classList.add('fading');
+
+      setTimeout(() => {
+        activeVerseRef.textContent = v.ref;
+        
+        // Render Hebrew words with spans
+        activeHebrewContainer.innerHTML = v.words.map((hw, wIdx) => {
+          return `<span class="sync-word" id="sw-${wIdx}">${hw.word}</span>`;
+        }).join(' ');
+
+        activePhonetic.textContent = v.phonetic;
+        activeSpanish.textContent = v.spanish;
+
+        activeVerseBox.classList.remove('fading');
+      }, 140);
+    }
+
+    /* Video Play/Pause Toggle */
+    function togglePlay() {
+      if (video.paused || video.ended) {
+        video.play();
+      } else {
+        video.pause();
+      }
+    }
+
+    video.addEventListener('play', () => {
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = 'block';
+      playOverlay.classList.add('hidden');
+    });
+
+    video.addEventListener('pause', () => {
+      playIcon.style.display = 'block';
+      pauseIcon.style.display = 'none';
+      playOverlay.classList.remove('hidden');
+    });
+
+    videoViewport.addEventListener('click', togglePlay);
+    btnPlayPause.addEventListener('click', togglePlay);
+
+    btnRewind.addEventListener('click', () => {
+      video.currentTime = Math.max(0, video.currentTime - 5);
+    });
+
+    btnForward.addEventListener('click', () => {
+      video.currentTime = Math.min(video.duration || 246, video.currentTime + 5);
+    });
+
+    /* Progress bar seek */
+    progressTrack.addEventListener('click', (e) => {
+      const rect = progressTrack.getBoundingClientRect();
+      const pos = (e.clientX - rect.left) / rect.width;
+      const duration = video.duration || 246;
+      video.currentTime = pos * duration;
+    });
+
+    /* Synchronize Current Verse and Words */
+    video.addEventListener('timeupdate', () => {
+      const curr = video.currentTime;
+      const duration = video.duration || 246;
+
+      // Update progress bar
+      const pct = (curr / duration) * 100;
+      progressFill.style.width = `${pct}%`;
+      timeDisplay.textContent = `${formatTime(curr)} / ${formatTime(duration)}`;
+
+      // Determine active verse index
+      let activeIndex = -1;
+      for (let i = 0; i < VERSES_DATA.length; i++) {
+        if (curr >= VERSES_DATA[i].start && curr < VERSES_DATA[i].end) {
+          activeIndex = i;
+          break;
+        }
+      }
+
+      if (activeIndex === -1 && curr < VERSES_DATA[0].start) {
+        activeIndex = 0;
+      } else if (activeIndex === -1 && curr >= VERSES_DATA[VERSES_DATA.length - 1].end) {
+        activeIndex = VERSES_DATA.length - 1;
+      }
+
+      if (activeIndex !== -1) {
+        // Change displayed verse if video advanced
+        if (activeIndex !== displayedVerseIndex) {
+          setDisplayedVerse(activeIndex);
+        }
+
+        // Highlight active word in the current verse
+        const currVerse = VERSES_DATA[activeIndex];
+        currVerse.words.forEach((hw, wIdx) => {
+          const wordEl = document.getElementById(`sw-${wIdx}`);
+          if (wordEl) {
+            if (curr >= hw.start && curr <= hw.end) {
+              wordEl.className = 'sync-word word-active';
+            } else if (curr > hw.end) {
+              wordEl.className = 'sync-word word-passed';
+            } else {
+              wordEl.className = 'sync-word';
+            }
+          }
+        });
+      }
+    });
+
+    /* Slide Deck Navigation */
+    function goToSlide(slideIdx) {
+      if (slideIdx < 0 || slideIdx >= slides.length) return;
+
+      if (currentSlide === 1 && slideIdx !== 1) {
+        video.pause();
+      }
+
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+
+      currentSlide = slideIdx;
+
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+      if (slideFooterText && SLIDE_FOOTER_TEXTS[currentSlide]) {
+        slideFooterText.textContent = SLIDE_FOOTER_TEXTS[currentSlide];
+      }
+
+      btnPrevSlide.disabled = (currentSlide === 0);
+      btnNextSlide.disabled = (currentSlide === slides.length - 1);
+    }
+
+    btnPrevSlide.addEventListener('click', () => goToSlide(currentSlide - 1));
+    btnNextSlide.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+    if (artImageWrapper) {
+      artImageWrapper.addEventListener('click', () => goToSlide(1));
+    }
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const idx = parseInt(dot.getAttribute('data-slide'), 10);
+        goToSlide(idx);
+      });
+    });
+
+    /* Keyboard Shortcuts */
+    window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT') return;
+
+      switch(e.code) {
+        case 'Space':
+          e.preventDefault();
+          if (currentSlide === 1) {
+            togglePlay();
+          } else {
+            goToSlide(currentSlide + 1);
+          }
+          break;
+
+        case 'ArrowRight':
+          if (currentSlide === 1) {
+            e.preventDefault();
+            video.currentTime = Math.min(video.duration || 246, video.currentTime + 5);
+          } else {
+            goToSlide(currentSlide + 1);
+          }
+          break;
+
+        case 'ArrowLeft':
+          if (currentSlide === 1) {
+            e.preventDefault();
+            video.currentTime = Math.max(0, video.currentTime - 5);
+          } else {
+            goToSlide(currentSlide - 1);
+          }
+          break;
+
+        case 'ArrowDown':
+        case 'PageDown':
+        case 'KeyN':
+          e.preventDefault();
+          goToSlide(currentSlide + 1);
+          break;
+
+        case 'ArrowUp':
+        case 'PageUp':
+        case 'KeyP':
+          e.preventDefault();
+          goToSlide(currentSlide - 1);
+          break;
+
+        case 'KeyF':
+          toggleFullscreen();
+          break;
+
+        case 'KeyH':
+        case 'Slash':
+          toggleHelp();
+          break;
+
+        case 'Escape':
+          keyboardHint.classList.remove('visible');
+          break;
+      }
+    });
+
+    /* Fullscreen Toggle */
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.warn('Fullscreen error:', err);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    /* Touch / Swipe gestures for iPad */
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    window.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    window.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].screenX;
+      const touchEndY = e.changedTouches[0].screenY;
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
+
+      // Detect deliberate horizontal swipe (more than 50px horizontally, less than 60px vertically)
+      if (Math.abs(diffX) > 50 && Math.abs(diffY) < 60) {
+        if (diffX < 0) {
+          // Swipe left -> Next slide
+          goToSlide(currentSlide + 1);
+        } else {
+          // Swipe right -> Previous slide
+          goToSlide(currentSlide - 1);
+        }
+      }
+    }, { passive: true });
+
+    /* Initial Load: Display first verse (5:2) */
+    setDisplayedVerse(0);
+  </script>
+</body>
+</html>
