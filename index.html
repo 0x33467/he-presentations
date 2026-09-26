@@ -397,6 +397,14 @@
       text-align: center;
       line-height: 1.4;
     }
+    .poetry-audio-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 14px;
+    }
     .poetry-image-placeholder {
       display: flex;
       flex-direction: column;
@@ -1049,6 +1057,28 @@
         </div>
         <div class="poetry-caption">
           <em>El matrimonio del Cordero</em> • Iluminación románica (s. XII) • Apocalipsis 19:7–9
+        </div>
+        <div class="poetry-audio-bar">
+          <button class="art-audio-pill" data-audio-id="artBgAudioMachaut" title="Guillaume de Machaut - Foy porter">
+            <svg class="audio-icon-play" width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <div class="sound-wave">
+              <span class="sound-bar"></span>
+              <span class="sound-bar"></span>
+              <span class="sound-bar"></span>
+            </div>
+            <span class="audio-pill-label">Foy porter • G. de Machaut</span>
+          </button>
+          <button class="art-audio-pill" data-audio-id="artBgAudioLandini" title="Francesco Landini - Questa fanciull', Amor">
+            <svg class="audio-icon-play" width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <div class="sound-wave">
+              <span class="sound-bar"></span>
+              <span class="sound-bar"></span>
+              <span class="sound-bar"></span>
+            </div>
+            <span class="audio-pill-label">Questa fanciull', Amor • F. Landini</span>
+          </button>
+          <audio id="artBgAudioMachaut" preload="none" loop src="musica_sanjuan_machaut.mp3"></audio>
+          <audio id="artBgAudioLandini" preload="none" loop src="musica_sanjuan_landini.mp3"></audio>
         </div>
       </div>
 
@@ -2029,6 +2059,7 @@
       if (slideFooterText && SLIDE_FOOTER_TEXTS[currentSlide]) {
         slideFooterText.textContent = SLIDE_FOOTER_TEXTS[currentSlide];
       }
+      history.replaceState(null, null, `#slide-${currentSlide}`);
 
       btnPrevSlide.disabled = (currentSlide === 0);
       btnNextSlide.disabled = (currentSlide === slides.length - 1);
@@ -2148,6 +2179,19 @@
         }
       }
     }, { passive: true });
+
+    /* Hash-based direct slide navigation (e.g. #slide-3) */
+    function checkHashSlide() {
+      const match = window.location.hash.match(/slide-(\d+)/);
+      if (match) {
+        const target = parseInt(match[1], 10);
+        if (target >= 0 && target < slides.length && target !== currentSlide) {
+          goToSlide(target);
+        }
+      }
+    }
+    window.addEventListener('hashchange', checkHashSlide);
+    checkHashSlide();
 
     /* Initial Load: Display first verse (5:2) */
     setDisplayedVerse(0);
