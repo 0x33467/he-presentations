@@ -278,30 +278,95 @@
       100% { height: 11px; }
     }
 
-    /* SLIDE 2: POETRY SLIDE (SAN JUAN DE LA CRUZ) */
+    /* SLIDE 2: POETRY SLIDE (SAN JUAN DE LA CRUZ) - TWO COLUMN LAYOUT */
     .poetry-slide {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      gap: 36px;
       height: 100%;
-      padding: 4px 24px 10px;
-      max-width: 1300px;
-      margin: 0 auto;
-      width: 100%;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 32px;
       box-sizing: border-box;
     }
-    .poetry-header-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-      flex-wrap: wrap;
-      gap: 8px;
-      flex-shrink: 0;
-    }
-    .poetry-title-group {
+
+    /* Left Column: Image Area */
+    .poetry-image-column {
+      flex: 0 0 42%;
+      max-width: 480px;
+      height: 100%;
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      justify-content: center;
+      align-items: center;
+    }
+    .poetry-image-card {
+      width: 100%;
+      height: 100%;
+      max-height: 75vh;
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 14px 34px -10px rgba(35, 49, 66, 0.1);
+      position: relative;
+    }
+    .poetry-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .poetry-image-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px;
+      color: var(--text-muted);
+      gap: 12px;
+      background: var(--bg-surface);
+      width: 100%;
+      height: 100%;
+      border: 2px dashed var(--border-light);
+      border-radius: 14px;
+    }
+    .placeholder-icon {
+      color: var(--gold-primary);
+      opacity: 0.8;
+    }
+    .placeholder-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy-primary);
+    }
+    .placeholder-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 240px;
+      line-height: 1.4;
+    }
+
+    /* Right Column: Straight Poem Text Stream */
+    .poetry-text-column {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      min-width: 0;
+      padding: 6px 0;
+    }
+    .poetry-header-block {
+      margin-bottom: 12px;
+      flex-shrink: 0;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 10px;
     }
     .poetry-badge {
       font-size: 10.5px;
@@ -313,149 +378,82 @@
       padding: 2px 7px;
       border-radius: 4px;
       display: inline-block;
-      width: fit-content;
+      margin-bottom: 4px;
     }
     .poetry-main-title {
-      font-size: 18.5px;
+      font-size: 20px;
       font-weight: 800;
       color: var(--navy-primary);
       letter-spacing: -0.01em;
+      line-height: 1.25;
+      margin-bottom: 3px;
     }
     .poetry-subtitle {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--text-secondary);
       font-weight: 500;
     }
-    .poetry-tabs {
-      display: flex;
-      gap: 4px;
-      align-items: center;
-      background: var(--bg-surface);
-      padding: 3px;
-      border-radius: 9px;
-      border: 1px solid var(--border-light);
-    }
-    .poetry-tab-btn {
-      background: transparent;
-      border: 1px solid transparent;
-      padding: 4px 11px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all 0.15s ease;
-      font-family: var(--sans-font);
-      user-select: none;
-    }
-    .poetry-tab-btn:hover {
-      color: var(--navy-primary);
-    }
-    .poetry-tab-btn.active {
-      background: #ffffff;
-      color: var(--navy-primary);
-      box-shadow: 0 1px 3px rgba(35, 49, 66, 0.08);
-      border-color: var(--border-light);
-    }
-    .poetry-tab-btn.huerto-btn {
-      color: #b45309;
-    }
-    .poetry-tab-btn.huerto-btn.active {
-      background: var(--gold-light);
-      border-color: var(--gold-primary);
-      color: #92400e;
-    }
 
-    /* Poetry Card Reader */
-    .poetry-reader-card {
+    /* Scrollable Text Stream */
+    .poem-scroll-stream {
       flex: 1;
-      min-height: 0;
-      background: #ffffff;
-      border: 1px solid var(--border-light);
-      border-radius: 14px;
-      box-shadow: 0 6px 20px -4px rgba(35, 49, 66, 0.05);
       overflow-y: auto;
-      padding: 14px 20px;
+      padding-right: 18px;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
-    }
-    .stanzas-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 12px;
-    }
-    .stanza-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 9px;
-      padding: 10px 14px;
-      transition: all 0.15s ease;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 16px;
     }
-    .stanza-card:hover {
-      border-color: var(--gold-primary);
-      background: #ffffff;
-      box-shadow: 0 3px 12px rgba(35, 49, 66, 0.06);
+    .poem-speaker-header {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(4px);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-top: 8px;
     }
-    .stanza-card.highlighted {
-      background: #fffdf7;
-      border: 1px solid var(--gold-primary);
-      box-shadow: 0 3px 10px rgba(230, 157, 27, 0.12);
+    .poem-speaker-badge {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 10px;
+      border-radius: 20px;
+      display: inline-block;
     }
-    .stanza-card.hidden {
-      display: none;
+    .poem-speaker-header.esposa .poem-speaker-badge {
+      background: var(--navy-primary);
+      color: #ffffff;
     }
-    .stanza-header {
+    .poem-speaker-header.esposo .poem-speaker-badge {
+      background: var(--gold-primary);
+      color: #ffffff;
+    }
+
+    .poem-stanza-item {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      align-items: baseline;
+      gap: 14px;
+      padding: 4px 0;
     }
-    .stanza-num {
-      font-size: 10.5px;
+    .poem-stanza-num {
+      font-family: monospace;
+      font-size: 12px;
       font-weight: 700;
       color: var(--text-dim);
-      font-family: monospace;
+      flex: 0 0 24px;
+      text-align: right;
     }
-    .stanza-speaker {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      padding: 1px 6px;
-      border-radius: 3px;
-    }
-    .speaker-esposa {
-      background: rgba(35, 49, 66, 0.08);
-      color: var(--navy-primary);
-    }
-    .speaker-esposo {
-      background: var(--gold-subtle);
-      color: #b45309;
-    }
-    .stanza-tag {
-      font-size: 9.5px;
-      font-weight: 700;
-      color: #92400e;
-      background: var(--gold-light);
-      padding: 1px 5px;
-      border-radius: 3px;
-      border: 1px solid rgba(230, 157, 27, 0.3);
-    }
-    .stanza-lines {
+    .poem-stanza-text {
       font-family: var(--hebrew-font);
-      font-size: 14px;
-      line-height: 1.45;
+      font-size: 15.5px;
+      line-height: 1.6;
       color: var(--navy-primary);
       font-style: normal;
-    }
-    .stanza-lines mark {
-      background: var(--gold-light);
-      color: #92400e;
-      font-weight: 600;
-      padding: 0 2px;
-      border-radius: 2px;
+      margin: 0;
     }
 
     /* SLIDE 3: MINIMAL INTERACTIVE SYNC (Centered layout) */
@@ -874,575 +872,452 @@
 
     <!-- SLIDE 2: POESÍA SAN JUAN DE LA CRUZ (CÁNTICO ESPIRITUAL) -->
     <div class="slide poetry-slide" id="slide-1">
-      <div class="poetry-header-row">
-        <div class="poetry-title-group">
+      
+      <!-- Left Column: Espacio para Imagen del Esposo y la Esposa -->
+      <div class="poetry-image-column">
+        <div class="poetry-image-card">
+          <img src="esposo_esposa.jpg" alt="El Esposo y la Esposa" class="poetry-image" id="poetryImage" onerror="this.style.display="none"; document.getElementById("poetryPlaceholder").style.display="flex";">
+          <div class="poetry-image-placeholder" id="poetryPlaceholder">
+            <div class="placeholder-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="3" ry="3"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <path d="M21 15l-5-5L5 21"/>
+              </svg>
+            </div>
+            <div class="placeholder-title">El Esposo y la Esposa</div>
+            <div class="placeholder-subtitle">Espacio reservado para la imagen de acompañamiento</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Texto corrido de la poesía -->
+      <div class="poetry-text-column">
+        <div class="poetry-header-block">
           <span class="poetry-badge">LÍRICA & MÍSTICA DEL SIGLO DE ORO</span>
           <h2 class="poetry-main-title">Cántico Espiritual entre el Alma y Cristo su Esposo</h2>
           <div class="poetry-subtitle">San Juan de la Cruz (1542–1591) • Inspirado en el Cantar de los Cantares</div>
         </div>
 
-        <div class="poetry-tabs" id="poetryTabs">
-          <button class="poetry-tab-btn active" data-filter="all">Todos (1–39)</button>
-          <button class="poetry-tab-btn" data-filter="sec1">I. La Búsqueda (1–12)</button>
-          <button class="poetry-tab-btn huerto-btn" data-filter="sec2">II. El Huerto (13–22)</button>
-          <button class="poetry-tab-btn" data-filter="sec3">III. La Unión (23–39)</button>
-          <button class="poetry-tab-btn huerto-btn" data-filter="highlights">★ Pasajes Clave</button>
+        <div class="poem-scroll-stream" id="poemScrollStream">
+            <div class="poem-speaker-header esposa">
+              <span class="poem-speaker-badge">Esposa</span>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">1</span>
+              <p class="poem-stanza-text">
+              Adónde te escondiste,<br>
+              Amado, y me dexaste con gemido?<br>
+              Como el ciervo huiste,<br>
+              habiéndome herido;<br>
+              salí tras ti clamando, y ya eras ido.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">2</span>
+              <p class="poem-stanza-text">
+              Pastores, los que fuerdes<br>
+              allá por las majadas al otero,<br>
+              si por ventura vierdes<br>
+              aquel que yo más quiero,<br>
+              decidle que adolezco, peno y muero.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">3</span>
+              <p class="poem-stanza-text">
+              Buscando mis amores<br>
+              iré por esos montes y riberas,<br>
+              ni cogeré las flores<br>
+              ni temeré las fieras,<br>
+              y pasaré los fuertes y fronteras.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">4</span>
+              <p class="poem-stanza-text">
+              ¡Oh bosques y espesuras,<br>
+              plantados por la mano del Amado,<br>
+              oh prado de verduras,<br>
+              de flores esmaltado,<br>
+              decid si por vosotros ha pasado!
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">5</span>
+              <p class="poem-stanza-text">
+              Mil gracias derramando<br>
+              pasó por estos sotos con presura,<br>
+              y, yéndolos mirando,<br>
+              con sola su figura<br>
+              vestidos los dexó de su hermosura.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">6</span>
+              <p class="poem-stanza-text">
+              ¡Ay, quién podrá sanarme!<br>
+              Acaba de entregarme ya de vero,<br>
+              no quieras enviarme<br>
+              de hoy más ya mensajero,<br>
+              que no saben decirme lo que quiero.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">7</span>
+              <p class="poem-stanza-text">
+              Y todos cuantos vagan<br>
+              de ti me van mil gracias refiriendo,<br>
+              y todo más me llagan<br>
+              y déxame muriendo<br>
+              un no sé qué que quedan balbuciendo.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">8</span>
+              <p class="poem-stanza-text">
+              Mas, ¿cómo perseveras,<br>
+              oh, vida, no viviendo donde vives<br>
+              y haciendo porque mueras<br>
+              las flechas me recibes<br>
+              de lo que del Amado en ti concibes?
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">9</span>
+              <p class="poem-stanza-text">
+              ¿Por qué, pues, has llagado<br>
+              a aqueste corazón, no lo sanaste?<br>
+              Y pues me lo has robado,<br>
+              ¿por qué así lo dexaste<br>
+              y no tomas el robo que robaste?
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">10</span>
+              <p class="poem-stanza-text">
+              Apaga mis enojos,<br>
+              pues que ninguno basta a desacellos,<br>
+              y véante mis ojos,<br>
+              pues eres lumbre dellos<br>
+              y solo para ti quiero tenellos.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">11</span>
+              <p class="poem-stanza-text">
+              Descubre su presencia<br>
+              y máteme tu vista y hermosura;<br>
+              mira que la dolencia<br>
+              de amor, que no se cura<br>
+              sino con la presencia y la figura.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">12</span>
+              <p class="poem-stanza-text">
+              ¡Oh cristalina fuente,<br>
+              si en esos tus semblantes plateados<br>
+              formases de repente<br>
+              los ojos deseados<br>
+              que tengo en mis entrañas dibujados!<br>
+              <br>
+              Apártalos, Amado,<br>
+              que voy de vuelo.
+              </p>
+            </div>
+            <div class="poem-speaker-header esposo">
+              <span class="poem-speaker-badge">Esposo</span>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">13</span>
+              <p class="poem-stanza-text">
+              Vuélvete, paloma,<br>
+              que el ciervo vulnerado<br>
+              por el otero asoma,<br>
+              el aire de tu vuelo, y fresco toma.
+              </p>
+            </div>
+            <div class="poem-speaker-header esposa">
+              <span class="poem-speaker-badge">Esposa</span>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">14</span>
+              <p class="poem-stanza-text">
+              Mi Amado, las montañas,<br>
+              los valles solitarios rumorosos,<br>
+              la noche sosegada,<br>
+              en par de los levantes de la aurora,<br>
+              la música callada,<br>
+              la soledad sonora,<br>
+              la cena, que recrea y enamora.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">15</span>
+              <p class="poem-stanza-text">
+              Cazadnos las raposas,<br>
+              que está ya florecida nuestra viña,<br>
+              en tanto que de rosas<br>
+              hacemos una piña,<br>
+              y no parezca nadie en la montiña.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">16</span>
+              <p class="poem-stanza-text">
+              Detente, Cierzo muerto;<br>
+              ven, austro, que recuerdas los amores;<br>
+              aspira por mi huerto<br>
+              y corran tus olores<br>
+              y pacerá el Amado entre las flores.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">17</span>
+              <p class="poem-stanza-text">
+              Oh ninfas de Judea,<br>
+              en tanto que en las flores y rosales<br>
+              el ámbar perfumea,<br>
+              mora en los arrabales,<br>
+              y no queráis tocar nuestros umbrales.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">18</span>
+              <p class="poem-stanza-text">
+              Escóndete, Carillo,<br>
+              y mira como tu has, a las montañas,<br>
+              y no quieras decillo;<br>
+              mas mira las compañas<br>
+              de la que va per ínsulas extrañas.
+              </p>
+            </div>
+            <div class="poem-speaker-header esposo">
+              <span class="poem-speaker-badge">Esposo</span>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">19</span>
+              <p class="poem-stanza-text">
+              A las aves ligeras,<br>
+              leones, ciervos, gamos saltadores,<br>
+              montes, valles, riberas,<br>
+              aguas, aires, ardores,<br>
+              y miedos en las noches veladores,
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">20</span>
+              <p class="poem-stanza-text">
+              por las amenas liras<br>
+              y cantos de sirena os conjuro,<br>
+              que cesen vuestras iras,<br>
+              y no toquéis al muro,<br>
+              porque la Esposa duerma más segura.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">21</span>
+              <p class="poem-stanza-text">
+              Entrándose ha la esposa<br>
+              en el ameno huerto deseado,<br>
+              y a su sabor reposa,<br>
+              el cuello reclinado<br>
+              sobre los dulces brazos del Amado.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">22</span>
+              <p class="poem-stanza-text">
+              Debajo del manzano,<br>
+              allí conmigo fuiste desposada,<br>
+              allí te di la mano,<br>
+              y fuiste reparada<br>
+              donde tu madre fuera violada.
+              </p>
+            </div>
+            <div class="poem-speaker-header esposa">
+              <span class="poem-speaker-badge">Esposa</span>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">23</span>
+              <p class="poem-stanza-text">
+              Nuestro lecho florido,<br>
+              de cuevas de leones enlazado,<br>
+              en púrpura teñido,<br>
+              de paz edificado,<br>
+              de mil escudos de oro coronado.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">24</span>
+              <p class="poem-stanza-text">
+              A zaga de tu huella<br>
+              los jóvenes discurren el camino,<br>
+              al toque de centella,<br>
+              al adobado vino,<br>
+              emisiones de bálsamo divino.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">25</span>
+              <p class="poem-stanza-text">
+              En la interior bodega<br>
+              de mi Amado bebí, y cuando salía<br>
+              por toda aquesta vega<br>
+              ya cosa no sabía<br>
+              y el ganado perdí que antes seguía.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">26</span>
+              <p class="poem-stanza-text">
+              Allí me dio su pecho,<br>
+              allí me enseñó ciencia muy sabrosa,<br>
+              y yo le di de hecho<br>
+              a mí, sin dejar cosa,<br>
+              allí le prometí de ser su esposa.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">27</span>
+              <p class="poem-stanza-text">
+              Mi alma se ha empleado<br>
+              y todo mi caudal en su servicio.<br>
+              Ya no guardo ganado<br>
+              ni ya tengo otro oficio;<br>
+              que ya sólo en amar es mi exercicio.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">28</span>
+              <p class="poem-stanza-text">
+              Pues ya si en el exido<br>
+              de hoy más no fuere vista ni hallada,<br>
+              diréis que me he perdido,<br>
+              que andando enamorada<br>
+              me hice perdidiza, y fui ganada.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">29</span>
+              <p class="poem-stanza-text">
+              De flores y esmeraldas,<br>
+              en las frescas mañanas escogidas,<br>
+              haremos las guirnaldas,<br>
+              en tu amor florecidas<br>
+              y en un cabello mío entretejidas.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">30</span>
+              <p class="poem-stanza-text">
+              En un solo cabello,<br>
+              que en mi cuello volar considereste,<br>
+              mirástele en mi cuello<br>
+              y en él preso quedaste,<br>
+              y en uno de mis ojos te llegaste.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">31</span>
+              <p class="poem-stanza-text">
+              Cuando tú me mirabas,<br>
+              su gracia en mí tus ojos imprimían,<br>
+              por eso me adamabas<br>
+              y en eso merecían<br>
+              los míos adorar lo que en ti vían.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">32</span>
+              <p class="poem-stanza-text">
+              No quieras despreciarme,<br>
+              que si color moreno en mí hallaste,<br>
+              ya bien puedes mirarme<br>
+              después que me miraste,<br>
+              que gracia y hermosura en mí dexaste.
+              </p>
+            </div>
+            <div class="poem-speaker-header esposo">
+              <span class="poem-speaker-badge">Esposo</span>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">33</span>
+              <p class="poem-stanza-text">
+              La blanca palomica<br>
+              al arca con el ramo se ha tornado,<br>
+              y ya la tortolica<br>
+              al socio deseado<br>
+              en las riberas verdes ha hallado.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">34</span>
+              <p class="poem-stanza-text">
+              En soledad vivía,<br>
+              y en soledad ha puesto ya su nido,<br>
+              y en soledad la guía<br>
+              a solas su querido,<br>
+              también en soledad de amor herido.
+              </p>
+            </div>
+            <div class="poem-speaker-header esposa">
+              <span class="poem-speaker-badge">Esposa</span>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">35</span>
+              <p class="poem-stanza-text">
+              Gocémonos, Amado,<br>
+              y vámonos a ver en su hermosura<br>
+              al monte y al collado<br>
+              do mana el agua pura;<br>
+              entremos más adentro en la espesura.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">36</span>
+              <p class="poem-stanza-text">
+              Y luego, a las subidas<br>
+              cavernas de las piedras nos iremos,<br>
+              que están bien escondidas,<br>
+              y allí nos entraremos<br>
+              y el mosto de granadas gustaremos.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">37</span>
+              <p class="poem-stanza-text">
+              Allí me mostrarías<br>
+              aquello que mi alma pretendía,<br>
+              y luego me darías<br>
+              allí tú, vida mía,<br>
+              aquello que me diste el otro día.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">38</span>
+              <p class="poem-stanza-text">
+              El aspirar del aire,<br>
+              el canto de la dulce Filomena,<br>
+              el soto y su donaire,<br>
+              en la noche serena,<br>
+              con llama que consume y no da pena.
+              </p>
+            </div>
+            <div class="poem-stanza-item">
+              <span class="poem-stanza-num">39</span>
+              <p class="poem-stanza-text">
+              Que nadie lo miraba,<br>
+              Aminadab tampoco parecía,<br>
+              y el cerco sosegaba,<br>
+              y la caballería,<br>
+              a vista de las aguas descendía.
+              </p>
+            </div>
         </div>
       </div>
 
-      <div class="poetry-reader-card" id="poetryReaderCard">
-        <div class="stanzas-grid" id="stanzasGrid">
-          <div class="stanza-card" data-section="sec1" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 1</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Adónde te escondiste,<br>
-            Amado, y me dexaste con gemido?<br>
-            Como el ciervo huiste,<br>
-            habiéndome herido;<br>
-            salí tras ti clamando, y ya eras ido.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec1" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 2</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Pastores, los que fuerdes<br>
-            allá por las majadas al otero,<br>
-            si por ventura vierdes<br>
-            aquel que yo más quiero,<br>
-            decidle que adolezco, peno y muero.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec1" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 3</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Buscando mis amores<br>
-            iré por esos montes y riberas,<br>
-            ni cogeré las flores<br>
-            ni temeré las fieras,<br>
-            y pasaré los fuertes y fronteras.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec1" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 4</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            ¡Oh bosques y espesuras,<br>
-            plantados por la mano del Amado,<br>
-            oh prado de verduras,<br>
-            de flores esmaltado,<br>
-            decid si por vosotros ha pasado!
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec1" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 5</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Mil gracias derramando<br>
-            pasó por estos sotos con presura,<br>
-            y, yéndolos mirando,<br>
-            con sola su figura<br>
-            vestidos los dexó de su hermosura.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec1" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 6</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            ¡Ay, quién podrá sanarme!<br>
-            Acaba de entregarme ya de vero,<br>
-            no quieras enviarme<br>
-            de hoy más ya mensajero,<br>
-            que no saben decirme lo que quiero.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec1" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 7</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Y todos cuantos vagan<br>
-            de ti me van mil gracias refiriendo,<br>
-            y todo más me llagan<br>
-            y déxame muriendo<br>
-            un no sé qué que quedan balbuciendo.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec1" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 8</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Mas, ¿cómo perseveras,<br>
-            oh, vida, no viviendo donde vives<br>
-            y haciendo porque mueras<br>
-            las flechas me recibes<br>
-            de lo que del Amado en ti concibes?
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec1" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 9</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            ¿Por qué, pues, has llagado<br>
-            a aqueste corazón, no lo sanaste?<br>
-            Y pues me lo has robado,<br>
-            ¿por qué así lo dexaste<br>
-            y no tomas el robo que robaste?
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec1" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 10</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Apaga mis enojos,<br>
-            pues que ninguno basta a desacellos,<br>
-            y véante mis ojos,<br>
-            pues eres lumbre dellos<br>
-            y solo para ti quiero tenellos.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec1" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 11</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Descubre su presencia<br>
-            y máteme tu vista y hermosura;<br>
-            mira que la dolencia<br>
-            de amor, que no se cura<br>
-            sino con la presencia y la figura.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec1" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 12</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            ¡Oh cristalina fuente,<br>
-            si en esos tus semblantes plateados<br>
-            formases de repente<br>
-            los ojos deseados<br>
-            que tengo en mis entrañas dibujados!<br>
-            Apártalos, Amado,<br>
-            que voy de vuelo.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec2" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 13</span>
-              <span class="stanza-speaker speaker-esposo">Esposo</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Vuélvete, paloma,<br>
-            que el ciervo vulnerado<br>
-            por el otero asoma,<br>
-            el aire de tu vuelo, y fresco toma.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec2" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 14</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Mi Amado, las montañas,<br>
-            los valles solitarios rumorosos,<br>
-            la noche sosegada,<br>
-            en par de los levantes de la aurora,<br>
-            la música callada,<br>
-            la soledad sonora,<br>
-            la cena, que recrea y enamora.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec2" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 15</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Cazadnos las raposas,<br>
-            que está ya florecida nuestra viña,<br>
-            en tanto que de rosas<br>
-            hacemos una piña,<br>
-            y no parezca nadie en la montiña.
-            </p>
-          </div>
-          <div class="stanza-card highlighted" data-section="sec2" data-highlight="true">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 16</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              <span class="stanza-tag">Cantares 4:16 • Huerto</span>
-            </div>
-            <p class="stanza-lines">
-            Detente, Cierzo muerto;<br>
-            ven, austro, que recuerdas los amores;<br>
-            aspira por <mark>mi huerto</mark><br>
-            y corran tus olores<br>
-            y pacerá el Amado entre las flores.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec2" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 17</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Oh ninfas de Judea,<br>
-            en tanto que en las flores y rosales<br>
-            el ámbar perfumea,<br>
-            mora en los arrabales,<br>
-            y no queráis tocar nuestros umbrales.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec2" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 18</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Escóndete, Carillo,<br>
-            y mira como tu has, a las montañas,<br>
-            y no quieras decillo;<br>
-            mas mira las compañas<br>
-            de la que va per ínsulas extrañas.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec2" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 19</span>
-              <span class="stanza-speaker speaker-esposo">Esposo</span>
-              
-            </div>
-            <p class="stanza-lines">
-            A las aves ligeras,<br>
-            leones, ciervos, gamos saltadores,<br>
-            montes, valles, riberas,<br>
-            aguas, aires, ardores,<br>
-            y miedos en las noches veladores,
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec2" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 20</span>
-              <span class="stanza-speaker speaker-esposo">Esposo</span>
-              
-            </div>
-            <p class="stanza-lines">
-            por las amenas liras<br>
-            y cantos de sirena os conjuro,<br>
-            que cesen vuestras iras,<br>
-            y no toquéis al muro,<br>
-            porque la Esposa duerma más segura.
-            </p>
-          </div>
-          <div class="stanza-card highlighted" data-section="sec2" data-highlight="true">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 21</span>
-              <span class="stanza-speaker speaker-esposo">Esposo</span>
-              <span class="stanza-tag">Cantares 5:1 • Huerto</span>
-            </div>
-            <p class="stanza-lines">
-            Entrándose ha la esposa<br>
-            en el ameno <mark>huerto deseado</mark>,<br>
-            y a su sabor reposa,<br>
-            el cuello reclinado<br>
-            sobre los dulces brazos del Amado.
-            </p>
-          </div>
-          <div class="stanza-card highlighted" data-section="sec2" data-highlight="true">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 22</span>
-              <span class="stanza-speaker speaker-esposo">Esposo</span>
-              <span class="stanza-tag">Cantares 8:5 • Manzano</span>
-            </div>
-            <p class="stanza-lines">
-            <mark>Debajo del manzano</mark>,<br>
-            allí conmigo fuiste desposada,<br>
-            allí te di la mano,<br>
-            y fuiste reparada<br>
-            donde tu madre fuera violada.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec3" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 23</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Nuestro lecho florido,<br>
-            de cuevas de leones enlazado,<br>
-            en púrpura teñido,<br>
-            de paz edificado,<br>
-            de mil escudos de oro coronado.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec3" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 24</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            A zaga de tu huella<br>
-            los jóvenes discurren el camino,<br>
-            al toque de centella,<br>
-            al adobado vino,<br>
-            emisiones de bálsamo divino.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec3" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 25</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            En la interior bodega<br>
-            de mi Amado bebí, y cuando salía<br>
-            por toda aquesta vega<br>
-            ya cosa no sabía<br>
-            y el ganado perdí que antes seguía.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec3" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 26</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Allí me dio su pecho,<br>
-            allí me enseñó ciencia muy sabrosa,<br>
-            y yo le di de hecho<br>
-            a mí, sin dejar cosa,<br>
-            allí le prometí de ser su esposa.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec3" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 27</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Mi alma se ha empleado<br>
-            y todo mi caudal en su servicio.<br>
-            Ya no guardo ganado<br>
-            ni ya tengo otro oficio;<br>
-            que ya sólo en amar es mi exercicio.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec3" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 28</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Pues ya si en el exido<br>
-            de hoy más no fuere vista ni hallada,<br>
-            diréis que me he perdido,<br>
-            que andando enamorada<br>
-            me hice perdidiza, y fui ganada.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec3" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 29</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            De flores y esmeraldas,<br>
-            en las frescas mañanas escogidas,<br>
-            haremos las guirnaldas,<br>
-            en tu amor florecidas<br>
-            y en un cabello mío entretejidas.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec3" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 30</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            En un solo cabello,<br>
-            que en mi cuello volar considereste,<br>
-            mirástele en mi cuello<br>
-            y en él preso quedaste,<br>
-            y en uno de mis ojos te llegaste.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec3" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 31</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Cuando tú me mirabas,<br>
-            su gracia en mí tus ojos imprimían,<br>
-            por eso me adamabas<br>
-            y en eso merecían<br>
-            los míos adorar lo que en ti vían.
-            </p>
-          </div>
-          <div class="stanza-card highlighted" data-section="sec3" data-highlight="true">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 32</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              <span class="stanza-tag">Cantares 1:5 • Morena</span>
-            </div>
-            <p class="stanza-lines">
-            No quieras despreciarme,<br>
-            que si <mark>color moreno en mí hallaste</mark>,<br>
-            ya bien puedes mirarme<br>
-            después que me miraste,<br>
-            que gracia y hermosura en mí dexaste.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec3" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 33</span>
-              <span class="stanza-speaker speaker-esposo">Esposo</span>
-              
-            </div>
-            <p class="stanza-lines">
-            La blanca palomica<br>
-            al arca con el ramo se ha tornado,<br>
-            y ya la tortolica<br>
-            al socio deseado<br>
-            en las riberas verdes ha hallado.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec3" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 34</span>
-              <span class="stanza-speaker speaker-esposo">Esposo</span>
-              
-            </div>
-            <p class="stanza-lines">
-            En soledad vivía,<br>
-            y en soledad ha puesto ya su nido,<br>
-            y en soledad la guía<br>
-            a solas su querido,<br>
-            también en soledad de amor herido.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec3" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 35</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Gocémonos, Amado,<br>
-            y vámonos a ver en su hermosura<br>
-            al monte y al collado<br>
-            do mana el agua pura;<br>
-            entremos más adentro en la espesura.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec3" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 36</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Y luego, a las subidas<br>
-            cavernas de las piedras nos iremos,<br>
-            que están bien escondidas,<br>
-            y allí nos entraremos<br>
-            y el mosto de granadas gustaremos.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec3" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 37</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Allí me mostrarías<br>
-            aquello que mi alma pretendía,<br>
-            y luego me darías<br>
-            allí tú, vida mía,<br>
-            aquello que me diste el otro día.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec3" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 38</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            El aspirar del aire,<br>
-            el canto de la dulce Filomena,<br>
-            el soto y su donaire,<br>
-            en la noche serena,<br>
-            con llama que consume y no da pena.
-            </p>
-          </div>
-          <div class="stanza-card" data-section="sec3" data-highlight="false">
-            <div class="stanza-header">
-              <span class="stanza-num">Estrofa 39</span>
-              <span class="stanza-speaker speaker-esposa">Esposa</span>
-              
-            </div>
-            <p class="stanza-lines">
-            Que nadie lo miraba,<br>
-            Aminadab tampoco parecía,<br>
-            y el cerco sosegaba,<br>
-            y la caballería,<br>
-            a vista de las aguas descendía.
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- SLIDE 3: MINIMAL INTERACTIVE VIDEO & CURRENT VERSE (CANTARES 5:2 - 5:16) -->
@@ -1943,43 +1818,6 @@
         goToSlide(idx);
       });
     });
-
-    /* Poetry Tabs Filter */
-    const poetryTabs = document.querySelectorAll('.poetry-tab-btn');
-    const stanzaCards = document.querySelectorAll('.stanza-card');
-    const poetryReaderCard = document.getElementById('poetryReaderCard');
-
-    if (poetryTabs.length > 0) {
-      poetryTabs.forEach((tab) => {
-        tab.addEventListener('click', () => {
-          poetryTabs.forEach(t => t.classList.remove('active'));
-          tab.classList.add('active');
-          const filter = tab.getAttribute('data-filter');
-
-          stanzaCards.forEach((card) => {
-            if (filter === 'all') {
-              card.classList.remove('hidden');
-            } else if (filter === 'highlights') {
-              if (card.getAttribute('data-highlight') === 'true') {
-                card.classList.remove('hidden');
-              } else {
-                card.classList.add('hidden');
-              }
-            } else {
-              if (card.getAttribute('data-section') === filter) {
-                card.classList.remove('hidden');
-              } else {
-                card.classList.add('hidden');
-              }
-            }
-          });
-
-          if (poetryReaderCard) {
-            poetryReaderCard.scrollTop = 0;
-          }
-        });
-      });
-    }
 
     /* Keyboard Shortcuts */
     window.addEventListener('keydown', (e) => {
