@@ -366,7 +366,7 @@
       width: 100%;
       height: 100%;
       max-height: 75vh;
-      background: #ffffff;
+      background: #faf8f5;
       border: 1px solid var(--border-light);
       border-radius: 16px;
       overflow: hidden;
@@ -380,7 +380,7 @@
     .poetry-image {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
     }
     .poetry-image-placeholder {
@@ -940,12 +940,12 @@
       </div>
     </div>
 
-    <!-- SLIDE 3: OBRA Y MÚSICA DE TROVADOR (UN AMOR DE LEJOS) -->
+    <!-- SLIDE 3: OBRA Y MÚSICA DE TROVADOR (CANTICUM CANTICORUM, ca. 1460) -->
     <div class="slide art-slide" id="slide-2">
       <div class="art-container">
         
         <div class="art-image-wrapper">
-          <img src="obra_slide3.jpg" alt="Obra de acompañamiento" class="art-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <img src="obra_slide3.jpg" alt="«El Novio coronando a la Esposa», ca. 1460 - Canticum Canticorum" class="art-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="art-image-placeholder" style="display:none;">
             <div class="placeholder-icon">
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -955,18 +955,28 @@
               </svg>
             </div>
             <div class="placeholder-title">Pintura / Obra de Arte</div>
-            <div class="placeholder-subtitle">Espacio reservado para la imagen de acompañamiento (obra_slide3.jpg)</div>
+            <div class="placeholder-subtitle">Espacio reservado para la imagen de acompañamiento</div>
           </div>
         </div>
 
         <div class="art-text-block">
-          <h2 class="art-main-title">«Un amor de lejos»</h2>
+          <h2 class="art-main-title">«El Novio coronando a la Esposa»</h2>
+          <div class="art-hebrew-verse">«Veni de Libano sponsa mea, veni coronaberis»</div>
+          
           <p class="art-explanation">
-            Canción trovadoresca medieval que evoca el anhelo del alma por el Amado lejano a quien ama sin haberlo visto, figura del peregrinaje espiritual y el cortejo místico.
+            Xilografía flamenca del <em>Canticum Canticorum</em> (ca. 1460). El Novio celestial ofrece la corona nupcial a la Esposa mientras proclama el llamado de amor de Cantares 4:8: “Ven del Líbano, esposa mía... ven y serás coronada”. En los filacterios dialogan los versos de Cantares 4:8 y 5:9.
           </p>
 
+          <div class="art-figures">
+            En la obra: Cristo el Esposo, la Novia coronada y las doncellas de Jerusalén
+          </div>
+
           <div class="art-meta-footer">
-            <span class="art-work-title">Música de trovador</span>
+            <span class="art-artist">Grabado xilográfico (Países Bajos)</span>
+            <span class="art-bullet">•</span>
+            <span class="art-work-title">Canticum Canticorum Blockbook</span>
+            <span class="art-bullet">•</span>
+            <span class="art-year">ca. 1460</span>
             <span class="art-bullet">•</span>
             <button class="art-audio-pill" data-audio-id="artBgAudio2" title="Un amor de lejos • Canción de trovador">
               <svg class="audio-icon-play" width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -990,8 +1000,8 @@
       <!-- Left Column: Espacio para Imagen del Esposo y la Esposa -->
       <div class="poetry-image-column">
         <div class="poetry-image-card">
-          <img src="esposo_esposa.jpg" alt="El Esposo y la Esposa" class="poetry-image" id="poetryImage" onerror="this.style.display='none'; document.getElementById('poetryPlaceholder').style.display='flex';">
-          <div class="poetry-image-placeholder" id="poetryPlaceholder">
+          <img src="esposo_esposa.jpg" alt="El matrimonio del Cordero - Manuscrito iluminado del siglo XII" class="poetry-image" id="poetryImage" onerror="this.style.display='none'; document.getElementById('poetryPlaceholder').style.display='flex';">
+          <div class="poetry-image-placeholder" id="poetryPlaceholder" style="display:none;">
             <div class="placeholder-icon">
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="3" width="18" height="18" rx="3" ry="3"/>
@@ -1002,6 +1012,9 @@
             <div class="placeholder-title">El Esposo y la Esposa</div>
             <div class="placeholder-subtitle">Espacio reservado para la imagen de acompañamiento</div>
           </div>
+        </div>
+        <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 8px; text-align: center; line-height: 1.4;">
+          <em>El matrimonio del Cordero</em> • Iluminación románica (s. XII) • Apocalipsis 19:7–9
         </div>
       </div>
 
@@ -1434,12 +1447,12 @@
 
     </div>
 
-    <!-- SLIDE 5: OBRA Y MÚSICA DE TROVADOR (CANCIÓN DE MAYO) -->
+    <!-- SLIDE 5: OBRA Y MÚSICA DE TROVADOR (EL DIVINO ESPOSO, 1811) -->
     <div class="slide art-slide" id="slide-4">
       <div class="art-container">
         
         <div class="art-image-wrapper">
-          <img src="obra_slide5.jpg" alt="Obra de acompañamiento" class="art-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <img src="obra_slide5.jpg" alt="«El Divino Esposo», 1811 - Andrés López" class="art-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="art-image-placeholder" style="display:none;">
             <div class="placeholder-icon">
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -1449,18 +1462,28 @@
               </svg>
             </div>
             <div class="placeholder-title">Pintura / Obra de Arte</div>
-            <div class="placeholder-subtitle">Espacio reservado para la imagen de acompañamiento (obra_slide5.jpg)</div>
+            <div class="placeholder-subtitle">Espacio reservado para la imagen de acompañamiento</div>
           </div>
         </div>
 
         <div class="art-text-block">
-          <h2 class="art-main-title">«Canción de mayo»</h2>
+          <h2 class="art-main-title">«El Divino Esposo en el Huerto»</h2>
+          <div class="art-hebrew-verse">«Ego dormio, et Cor meum vigilat» (Cantares 5:2)</div>
+          
           <p class="art-explanation">
-            Canto de trovador que celebra el despertar de la vida y el júbilo del amor que florece, resonando con el reencuentro de los esposos tras el Cántico Espiritual.
+            Pintura virreinal de Andrés López (1811) inspirada en el Cantar de los Cantares. El Pastor enamorado reposa en un huerto de lirios mientras vela por su Esposa: “Yo dormía, pero mi corazón velaba”. Acompañado de una glosa mística en verso sobre el corazón herido por amor.
           </p>
 
+          <div class="art-figures">
+            En el cuadro: El Divino Esposo, la ovejita herida por amor y el coro celestial de ángeles
+          </div>
+
           <div class="art-meta-footer">
-            <span class="art-work-title">Canto de trovador</span>
+            <span class="art-artist">Andrés López</span>
+            <span class="art-bullet">•</span>
+            <span class="art-work-title">El Divino Esposo (México)</span>
+            <span class="art-bullet">•</span>
+            <span class="art-year">1811</span>
             <span class="art-bullet">•</span>
             <button class="art-audio-pill" data-audio-id="artBgAudio4" title="Canción de mayo • Canto de trovador">
               <svg class="audio-icon-play" width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -1788,9 +1811,9 @@
     const SLIDE_FOOTER_TEXTS = [
       'Iconografía: Salmo 45:9 • Catedral de Smolensk (1676)',
       'Mensaje: «El novio manda a decir a la novia»',
-      'Obra & Música de trovador: Un amor de lejos',
-      'Poesía mística: San Juan de la Cruz • Cántico Espiritual',
-      'Obra & Música de trovador: Canción de mayo',
+      'Obra & Música de trovador: Cantares 4:8 • Canticum Canticorum (ca. 1460)',
+      'Poesía mística: San Juan de la Cruz • Cántico Espiritual & Bodas del Cordero (s. XII)',
+      'Obra & Canto de trovador: Cantares 5:2 • El Divino Esposo (1811)',
       'Lectura bíblica: Rabino Weisblum • Nósuaj Ashkenaz (Cantares 5:2-16)'
     ];
 
