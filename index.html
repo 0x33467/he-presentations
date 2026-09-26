@@ -676,14 +676,14 @@
             <span class="art-bullet">•</span>
             <span class="art-year">1676</span>
             <span class="art-bullet">•</span>
-            <button class="art-audio-pill" id="btnArtAudio" title="Reproducir música: J.S. Bach — Arioso (BWV 156)">
+            <button class="art-audio-pill" id="btnArtAudio" title="Arioso Cantata No. 156 J.S BACH">
               <svg class="audio-icon-play" width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               <div class="sound-wave">
                 <span class="sound-bar"></span>
                 <span class="sound-bar"></span>
                 <span class="sound-bar"></span>
               </div>
-              <span class="audio-pill-label">J.S. Bach — Arioso</span>
+              <span class="audio-pill-label">Arioso Cantata No. 156 J.S BACH</span>
             </button>
             <audio id="artBgAudio" preload="none" loop src="smolensk_audio.mp3"></audio>
           </div>
@@ -1055,12 +1055,12 @@
 
       artBgAudio.addEventListener('play', () => {
         btnArtAudio.classList.add('playing');
-        btnArtAudio.setAttribute('title', 'Pausar música: J.S. Bach — Arioso');
+        btnArtAudio.setAttribute('title', 'Pausar: Arioso Cantata No. 156 J.S BACH');
       });
 
       artBgAudio.addEventListener('pause', () => {
         btnArtAudio.classList.remove('playing');
-        btnArtAudio.setAttribute('title', 'Reproducir música: J.S. Bach — Arioso');
+        btnArtAudio.setAttribute('title', 'Reproducir: Arioso Cantata No. 156 J.S BACH');
       });
     }
 
