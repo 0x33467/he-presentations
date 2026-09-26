@@ -196,12 +196,14 @@
     .art-meta-footer {
       display: flex;
       align-items: center;
-      gap: 7px;
-      font-size: 10.5px;
+      gap: 8px;
+      font-size: 11px;
       color: var(--text-muted);
       border-top: 1px solid var(--border-light);
-      padding-top: 4px;
+      padding-top: 6px;
       margin-top: 2px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
     .art-work-title {
       font-weight: 700;
@@ -216,6 +218,64 @@
     .art-year {
       font-weight: 600;
       color: var(--text-secondary);
+    }
+
+    /* Subtle Audio Pill Button (Slide 1) */
+    .art-audio-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      color: var(--navy-primary);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--sans-font);
+      outline: none;
+      user-select: none;
+    }
+    .art-audio-pill:hover {
+      background: #ffffff;
+      border-color: var(--gold-primary);
+      color: var(--gold-hover);
+      box-shadow: 0 2px 8px rgba(230, 157, 27, 0.15);
+      transform: translateY(-1px);
+    }
+    .art-audio-pill.playing {
+      background: var(--gold-light);
+      border-color: var(--gold-primary);
+      color: #92400e;
+      box-shadow: 0 2px 10px rgba(230, 157, 27, 0.2);
+    }
+    .sound-wave {
+      display: none;
+      align-items: flex-end;
+      gap: 2px;
+      height: 11px;
+    }
+    .art-audio-pill.playing .sound-wave {
+      display: inline-flex;
+    }
+    .art-audio-pill.playing .audio-icon-play {
+      display: none;
+    }
+    .sound-bar {
+      width: 2px;
+      background: var(--gold-primary);
+      border-radius: 1px;
+      animation: soundWaveAnim 0.9s ease-in-out infinite alternate;
+    }
+    .sound-bar:nth-child(1) { height: 4px; animation-delay: 0.1s; }
+    .sound-bar:nth-child(2) { height: 11px; animation-delay: 0.3s; }
+    .sound-bar:nth-child(3) { height: 6px; animation-delay: 0.2s; }
+
+    @keyframes soundWaveAnim {
+      0% { height: 3px; }
+      100% { height: 11px; }
     }
 
     /* SLIDE 2: MINIMAL INTERACTIVE SYNC (Centered layout) */
@@ -615,6 +675,17 @@
             <span class="art-work-title">Catedral de Smolensk (Moscú)</span>
             <span class="art-bullet">•</span>
             <span class="art-year">1676</span>
+            <span class="art-bullet">•</span>
+            <button class="art-audio-pill" id="btnArtAudio" title="Reproducir música: J.S. Bach — Arioso (BWV 156)">
+              <svg class="audio-icon-play" width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <div class="sound-wave">
+                <span class="sound-bar"></span>
+                <span class="sound-bar"></span>
+                <span class="sound-bar"></span>
+              </div>
+              <span class="audio-pill-label">J.S. Bach — Arioso</span>
+            </button>
+            <audio id="artBgAudio" preload="none" loop src="smolensk_audio.mp3"></audio>
           </div>
         </div>
 
@@ -910,6 +981,8 @@
     const activePhonetic = document.getElementById('activePhonetic');
     const activeSpanish = document.getElementById('activeSpanish');
     const artImageWrapper = document.getElementById('artImageWrapper');
+    const btnArtAudio = document.getElementById('btnArtAudio');
+    const artBgAudio = document.getElementById('artBgAudio');
 
     let displayedVerseIndex = -1;
 
@@ -967,7 +1040,34 @@
       }
     }
 
+    /* Slide 1 Background Audio Control */
+    if (btnArtAudio && artBgAudio) {
+      btnArtAudio.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (artBgAudio.paused) {
+          artBgAudio.play().catch(err => {
+            console.warn('Audio play error:', err);
+          });
+        } else {
+          artBgAudio.pause();
+        }
+      });
+
+      artBgAudio.addEventListener('play', () => {
+        btnArtAudio.classList.add('playing');
+        btnArtAudio.setAttribute('title', 'Pausar música: J.S. Bach — Arioso');
+      });
+
+      artBgAudio.addEventListener('pause', () => {
+        btnArtAudio.classList.remove('playing');
+        btnArtAudio.setAttribute('title', 'Reproducir música: J.S. Bach — Arioso');
+      });
+    }
+
     video.addEventListener('play', () => {
+      if (artBgAudio && !artBgAudio.paused) {
+        artBgAudio.pause();
+      }
       playIcon.style.display = 'none';
       pauseIcon.style.display = 'block';
       playOverlay.classList.add('hidden');
@@ -1052,6 +1152,12 @@
 
       if (currentSlide === 1 && slideIdx !== 1) {
         video.pause();
+      }
+
+      if (currentSlide === 0 && slideIdx !== 0) {
+        if (artBgAudio && !artBgAudio.paused) {
+          artBgAudio.pause();
+        }
       }
 
       slides[currentSlide].classList.remove('active');
