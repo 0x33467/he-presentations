@@ -340,48 +340,62 @@
       100% { height: 11px; }
     }
 
-    /* SLIDE 2: POETRY SLIDE (SAN JUAN DE LA CRUZ) - TWO COLUMN LAYOUT */
+    /* SLIDE 4: POETRY SLIDE (SAN JUAN DE LA CRUZ) - TWO COLUMN EQUAL HALF LAYOUT */
     .poetry-slide {
       display: flex;
       flex-direction: row;
       gap: 36px;
       height: 100%;
       align-items: center;
-      justify-content: center;
-      padding: 12px 32px;
+      justify-content: space-between;
+      padding: 14px 40px;
       box-sizing: border-box;
     }
 
-    /* Left Column: Image Area */
+    /* Left Column: Image Area (Occupies half of the presentation) */
     .poetry-image-column {
-      flex: 0 0 42%;
-      max-width: 480px;
+      flex: 0 0 calc(50% - 18px);
+      max-width: calc(50% - 18px);
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      min-width: 0;
     }
     .poetry-image-card {
       width: 100%;
-      height: 100%;
-      max-height: 75vh;
-      background: #faf8f5;
-      border: 1px solid var(--border-light);
-      border-radius: 16px;
-      overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 14px 34px -10px rgba(35, 49, 66, 0.1);
+      background: transparent;
+      border: none;
+      box-shadow: none;
       position: relative;
     }
     .poetry-image {
-      width: 100%;
-      height: 100%;
+      max-width: 100%;
+      max-height: 72vh;
+      width: auto;
+      height: auto;
       object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 16px 36px -8px rgba(35, 49, 66, 0.22);
+      border: 1px solid var(--border-light);
       display: block;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .poetry-image:hover {
+      transform: scale(1.012);
+      box-shadow: 0 20px 42px -6px rgba(35, 49, 66, 0.3);
+    }
+    .poetry-caption {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 10px;
+      text-align: center;
+      line-height: 1.4;
     }
     .poetry-image-placeholder {
       display: flex;
@@ -394,7 +408,7 @@
       gap: 12px;
       background: var(--bg-surface);
       width: 100%;
-      height: 100%;
+      max-height: 72vh;
       border: 2px dashed var(--border-light);
       border-radius: 14px;
     }
@@ -414,13 +428,16 @@
       line-height: 1.4;
     }
 
-    /* Right Column: Straight Poem Text Stream */
+    /* Right Column: Straight Poem Text Stream (Occupies other half, Centered) */
     .poetry-text-column {
-      flex: 1;
+      flex: 0 0 calc(50% - 18px);
+      max-width: calc(50% - 18px);
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      align-items: center;
+      text-align: center;
       min-width: 0;
       padding: 6px 0;
     }
@@ -429,6 +446,11 @@
       flex-shrink: 0;
       border-bottom: 1px solid var(--border-subtle);
       padding-bottom: 10px;
+      text-align: center;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .poetry-badge {
       font-size: 10.5px;
@@ -449,22 +471,26 @@
       letter-spacing: -0.01em;
       line-height: 1.25;
       margin-bottom: 3px;
+      text-align: center;
     }
     .poetry-subtitle {
       font-size: 13px;
       color: var(--text-secondary);
       font-weight: 500;
+      text-align: center;
     }
 
     /* Scrollable Text Stream */
     .poem-scroll-stream {
       flex: 1;
+      width: 100%;
       overflow-y: auto;
-      padding-right: 18px;
+      padding: 0 16px;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: 16px;
     }
     .poem-speaker-header {
@@ -476,6 +502,10 @@
       padding: 6px 0;
       border-bottom: 1px solid var(--border-subtle);
       margin-top: 8px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      text-align: center;
     }
     .poem-speaker-badge {
       font-size: 11px;
@@ -497,17 +527,20 @@
 
     .poem-stanza-item {
       display: flex;
-      align-items: baseline;
-      gap: 14px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 3px;
       padding: 4px 0;
+      width: 100%;
     }
     .poem-stanza-num {
       font-family: monospace;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 700;
-      color: var(--text-dim);
-      flex: 0 0 24px;
-      text-align: right;
+      color: var(--gold-primary);
+      text-align: center;
+      letter-spacing: 0.05em;
     }
     .poem-stanza-text {
       font-family: var(--hebrew-font);
@@ -515,6 +548,7 @@
       line-height: 1.6;
       color: var(--navy-primary);
       font-style: normal;
+      text-align: center;
       margin: 0;
     }
 
@@ -1013,7 +1047,7 @@
             <div class="placeholder-subtitle">Espacio reservado para la imagen de acompañamiento</div>
           </div>
         </div>
-        <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 8px; text-align: center; line-height: 1.4;">
+        <div class="poetry-caption">
           <em>El matrimonio del Cordero</em> • Iluminación románica (s. XII) • Apocalipsis 19:7–9
         </div>
       </div>
