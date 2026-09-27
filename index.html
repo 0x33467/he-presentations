@@ -63,10 +63,6 @@
       position: relative;
     }
 
-    body.zen-mode header {
-      display: none !important;
-    }
-
     /* Ambient Subtle Background Pattern */
     .bg-pattern {
       position: absolute;
@@ -76,31 +72,7 @@
       pointer-events: none;
       z-index: 0;
     }
-
-    /* Header Bar */
-    header {
-      position: relative;
-      z-index: 10;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10px 36px;
-      background: #ffffff;
-      border-bottom: 1px solid var(--border-light);
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
-    }
-    .header-center {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .header-logo {
-      height: 48px;
-      width: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06));
-    }
-
+ 
     /* Slide Deck Container */
     .deck-container {
       position: relative;
@@ -837,11 +809,38 @@
       color: var(--text-muted);
       display: flex;
       align-items: center;
-      gap: 14px;
-      max-width: 42%;
+      gap: 12px;
+      max-width: 48%;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .footer-logo {
+      height: 23px;
+      width: auto;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.45;
+      transition: filter 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+      vertical-align: middle;
+    }
+    .footer-brand:hover .footer-logo {
+      filter: grayscale(0%);
+      opacity: 0.95;
+      transform: scale(1.06);
+    }
+    .footer-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--border-light);
+      flex-shrink: 0;
     }
     .biblical-credit {
       font-weight: 500;
@@ -850,6 +849,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      min-width: 0;
       transition: opacity 0.2s ease;
     }
     .footer-separator {
@@ -942,12 +942,6 @@
 
   <div class="bg-pattern"></div>
 
-  <!-- Header -->
-  <header>
-    <div class="header-center">
-      <img src="logoHE.png" alt="Huerto de Edén" class="header-logo">
-    </div>
-  </header>
 
   <!-- Presentation Deck -->
   <div class="deck-container">
@@ -1870,6 +1864,10 @@
   <!-- Footer Navigation -->
   <footer>
     <div class="footer-left">
+      <div class="footer-brand" id="footerBrand" title="Huerto de Edén • Ir al inicio">
+        <img src="logoHE.png" alt="Huerto de Edén" class="footer-logo">
+      </div>
+      <div class="footer-divider"></div>
       <span class="biblical-credit" id="slideFooterText">Iconografía: Salmo 45:9 • Catedral de Smolensk (1676)</span>
     </div>
 
@@ -2312,6 +2310,11 @@
 
     if (artImageWrapper) {
       artImageWrapper.addEventListener('click', () => goToSlide(1));
+    }
+
+    const footerBrand = document.getElementById('footerBrand');
+    if (footerBrand) {
+      footerBrand.addEventListener('click', () => goToSlide(0));
     }
 
     dots.forEach((dot) => {
