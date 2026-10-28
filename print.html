@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="logoHE.png">
+  <title>Edición Imprimible — Salmo 45:9 & Cantar de los Cantares 5 - Huerto de Edén</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #ffffff;
+      --bg-surface: #f8fafc;
+      --bg-card: #ffffff;
+
+      /* Colores del logo Huerto de Edén */
+      --navy-primary: #233142;
+      --navy-dark: #16202c;
+      --navy-light: #324458;
+      --gold-primary: #e69d1b;
+      --gold-hover: #c9840e;
+      --gold-light: #fef3c7;
+      --gold-subtle: rgba(230, 157, 27, 0.12);
+      --gold-glow: rgba(230, 157, 27, 0.3);
+
+      --border-light: #e2e8f0;
+      --border-subtle: #edf2f7;
+      --border-active: #e69d1b;
+
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+
+      --hebrew-font: 'Frank Ruhl Libre', 'David Libre', 'Times New Roman', serif;
+      --sans-font: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+      /* Dimensiones de página horizontal (Carta / Letter Landscape 11in x 8.5in) */
+      --page-width: 11in;
+      --page-height: 8.5in;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    @page {
+      size: letter landscape;
+      margin: 0;
+    }
+
+    body {
+      background: #e2e8f0;
+      color: var(--text-primary);
+      font-family: var(--sans-font);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 72px 24px 48px;
+      gap: 28px;
+    }
+
+    /* Barra superior de herramientas (solo en pantalla, oculta al imprimir) */
+    .print-toolbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 56px;
+      background: var(--navy-primary);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(22, 32, 44, 0.25);
+    }
+
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .toolbar-logo {
+      height: 28px;
+      width: auto;
+      background: #ffffff;
+      padding: 3px 6px;
+      border-radius: 6px;
+    }
+
+    .toolbar-title {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #ffffff;
+    }
+
+    .toolbar-subtitle {
+      font-size: 12px;
+      color: #cbd5e1;
+      font-weight: 400;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toolbar-link {
+      color: #e2e8f0;
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .toolbar-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    .btn-print {
+      background: var(--gold-primary);
+      color: #ffffff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-family: var(--sans-font);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 10px rgba(230, 157, 27, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    .btn-print:hover {
+      background: var(--gold-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Contenedor de cada lámina / página imprimible */
+    .print-page {
+      width: var(--page-width);
+      height: var(--page-height);
+      background: var(--bg-main);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      box-shadow: 0 12px 36px rgba(22, 32, 44, 0.18);
+      border-radius: 4px;
+      page-break-after: always;
+      break-after: page;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .print-page:last-of-type {
+      page-break-after: auto;
+      break-after: auto;
+    }
+
+    /* Patrón sutil de fondo igual al interactivo */
+    .bg-pattern {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(35, 49, 66, 0.045) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Cuerpo interior de la diapositiva */
+    .page-body {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 0.42in 0.55in 0.25in;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    /* Pie de página editorial fijo en cada hoja */
+    .page-footer {
+      position: relative;
+      z-index: 2;
+      height: 0.48in;
+      padding: 0 0.55in;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      border-top: 1px solid var(--border-light);
+      flex-shrink: 0;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .footer-logo {
+      height: 20px;
+      width: auto;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.55;
+    }
+
+    .footer-divider {
+      width: 1px;
+      height: 14px;
+      background: var(--border-light);
+    }
+
+    .biblical-credit {
+      font-weight: 500;
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+
+    .slide-counter {
+      font-family: var(--sans-font);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      padding: 3px 10px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .slide-counter-cur {
+      color: var(--navy-primary);
+      font-weight: 800;
+    }
+
+    .slide-counter-sep {
+      color: var(--text-dim);
+    }
+
+    /* =================================================================
+       LÁMINAS DE ARTE (Slides 1, 3, 6)
+       ================================================================= */
+    .art-layout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100%;
+      gap: 10px;
+    }
+
+    .art-image-frame {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-height: 4.55in;
+    }
+
+    .art-image {
+      max-height: 4.55in;
+      max-width: 8.8in;
+      width: auto;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border-light);
+      box-shadow: 0 10px 25px -6px rgba(35, 49, 66, 0.18);
+    }
+
+    .art-text-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      max-width: 780px;
+    }
+
+    .art-main-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--navy-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .art-hebrew-verse {
+      font-family: var(--hebrew-font);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--gold-primary);
+      line-height: 1.25;
+    }
+
+    .art-explanation {
+      font-size: 12.5px;
+      line-height: 1.48;
+      color: var(--text-secondary);
+      max-width: 720px;
+    }
+
+    .art-figures {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .art-meta-footer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-light);
+      padding-top: 6px;
+      margin-top: 2px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .art-work-title {
+      font-weight: 700;
+      color: var(--navy-primary);
+    }
+
+    .art-artist {
+      font-style: italic;
+    }
+
+    .art-bullet {
+      color: var(--text-dim);
+    }
+
+    .art-year {
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .music-credit-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--gold-subtle);
+      border: 1px solid rgba(230, 157, 27, 0.35);
+      color: var(--navy-primary);
+      padding: 2px 9px;
+      border-radius: 14px;
+      font-size: 10.5px;
+      font-weight: 600;
+    }
+
+    .music-credit-badge .music-note {
+      color: var(--gold-hover);
+      font-weight: 800;
+    }
+
+    /* =================================================================
+       LÁMINA DE FRASE / TRANSICIÓN (Slide 2)
+       ================================================================= */
+    .statement-layout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100%;
+      gap: 22px;
+      padding: 0 0.8in;
+    }
+
+    .statement-ornament {
+      color: var(--gold-primary);
+      font-size: 28px;
+      opacity: 0.9;
+    }
+
+    .statement-text {
+      font-family: var(--hebrew-font);
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--navy-primary);
+      line-height: 1.3;
+      font-style: italic;
+    }
+
+    .statement-translation {
+      font-family: var(--hebrew-font);
+      font-size: 32px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    /* =================================================================
+       LÁMINAS DE POESÍA Y TEXTO BÍBLICO EN VERSO (Cap. IV y San Juan)
+       ================================================================= */
+    .poetry-header-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--border-subtle);
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+
+    .poetry-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .poetry-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .poetry-badge {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-hover);
+      background: var(--gold-subtle);
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .poetry-part-tag {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .poetry-main-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--navy-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .poetry-subtitle {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* Diseño mixto: Imagen lateral + Columnas de estrofas */
+    .poetry-split-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 3.1in 1fr;
+      gap: 0.35in;
+      align-items: center;
+      min-height: 0;
+    }
+
+    .poetry-art-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 8px;
+    }
+
+    .poetry-side-img {
+      max-width: 100%;
+      max-height: 5.1in;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+      border: 1px solid var(--border-light);
+      box-shadow: 0 8px 22px -6px rgba(35, 49, 66, 0.18);
+    }
+
+    .poetry-caption {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .stanzas-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px 24px;
+      align-content: start;
+    }
+
+    .stanzas-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px 20px;
+      align-content: start;
+    }
+
+    .stanzas-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px 18px;
+      align-content: start;
+    }
+
+    .stanza-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .speaker-pill {
+      font-size: 9.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 2px 9px;
+      border-radius: 12px;
+      display: inline-block;
+      align-self: flex-start;
+      margin-bottom: 1px;
+    }
+
+    .speaker-pill.esposo {
+      background: var(--gold-primary);
+      color: #ffffff;
+    }
+
+    .speaker-pill.esposa {
+      background: var(--navy-primary);
+      color: #ffffff;
+    }
+
+    .stanza-box {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stanza-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stanza-num {
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold-hover);
+      background: var(--gold-subtle);
+      padding: 0 5px;
+      border-radius: 3px;
+    }
+
+    .stanza-text {
+      font-family: var(--hebrew-font);
+      font-size: 12.6px;
+      line-height: 1.42;
+      color: var(--navy-primary);
+    }
+
+    .stanza-text.compact {
+      font-size: 12px;
+      line-height: 1.38;
+    }
+
+    /* Galería complementaria para San Juan de la Cruz */
+    .mini-gallery-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 8px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .mini-gallery-img {
+      width: 100%;
+      height: 0.95in;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border-light);
+    }
+
+    /* =================================================================
+       LÁMINAS BÍBLICAS HEBREO-ESPAÑOL (Cantares 5:2 - 5:16)
+       ================================================================= */
+    .verses-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      justify-content: space-evenly;
+    }
+
+    .verse-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-left: 4px solid var(--gold-primary);
+      border-radius: 8px;
+      padding: 9px 14px;
+      display: grid;
+      grid-template-columns: 54px 1fr 1.15fr;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .verse-num-badge {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--navy-primary);
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      padding: 5px 6px;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
+    .verse-hebrew-col {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .verse-hebrew {
+      font-family: var(--hebrew-font);
+      direction: rtl;
+      text-align: right;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--navy-primary);
+    }
+
+    .verse-phonetic {
+      font-size: 11px;
+      color: #b45309;
+      font-style: italic;
+      line-height: 1.35;
+      font-weight: 500;
+    }
+
+    .verse-spanish {
+      font-size: 12.8px;
+      line-height: 1.42;
+      color: var(--navy-primary);
+      font-weight: 600;
+      border-left: 2px solid var(--border-light);
+      padding-left: 12px;
+    }
+
+    /* =================================================================
+       REGLAS DE IMPRESIÓN (@media print)
+       ================================================================= */
+    @media print {
+      html, body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        gap: 0 !important;
+        display: block !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .print-page {
+        width: 11in !important;
+        height: 8.5in !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        border: none !important;
+        page-break-after: always !important;
+        break-after: page !important;
+      }
+
+      .print-page:last-of-type {
+        page-break-after: auto !important;
+        break-after: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR (SOLO PANTALLA) -->
+  <header class="print-toolbar no-print">
+    <div class="toolbar-left">
+      <img src="logoHE.png" alt="Huerto de Edén" class="toolbar-logo">
+      <div>
+        <div class="toolbar-title">Salmo 45:9 &amp; Cantar de los Cantares 5 — Edición Imprimible</div>
+        <div class="toolbar-subtitle">12 láminas en formato horizontal (Letter / A4 Landscape) • Listo para impresora o PDF</div>
+      </div>
+    </div>
+    <div class="toolbar-actions">
+      <a href="index.html" class="toolbar-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Ver Presentación Interactiva
+      </a>
+      <button class="btn-print" onclick="window.print()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Imprimir / Guardar PDF
+      </button>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       PÁGINA 01: CATEDRAL DE SMOLENSK & SALMO 45:9
+       ===================================================================== -->
+  <section class="print-page">
+    <div class="bg-pattern"></div>
+    <div class="page-body">
+      <div class="art-layout">
+        <div class="art-image-frame">
+          <img src="smolensk_1676.jpg" alt="«La Reina se apostó a tu diestra», 1676 - Nikita Pavlovets" class="art-image">
+        </div>
+        <div class="art-text-block">
+          <h1 class="art-main-title">«La Reina se apostó a tu diestra»</h1>
+          <div class="art-hebrew-verse" dir="rtl">נִצְּבָה שֵׁגַל לִימִינְךָ בְּכֶתֶם אוֹפִיר׃</div>
+          <p class="art-explanation">
+            Pintura basada en el Salmo nupcial (Salmo 45:9), refleja la iconografía del canto para las bodas reales de los reyes de Israel: «La reina está a tu diestra con oro de Ofir». De fondo, el amigo del novio acompaña las nupcias.
+          </p>
+          <div class="art-figures">En el cuadro: Cristo, La Iglesia y Juan el Bautista</div>
+          <div class="art-meta-footer">
+            <span class="art-artist">Nikita Pávlovets</span>
+            <span class="art-bullet">•</span>
+            <span class="art-work-title">Catedral de Smolensk (Moscú)</span>
+            <span class="art-bullet">•</span>
+            <span class="art-year">1676</span>
+            <span class="art-bullet">•</span>
+            <span class="music-credit-badge"><span class="music-note">♪</span> Arioso Cantata No. 156 — J.S. Bach</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="page-footer">
+      <div class="footer-left">
+        <img src="logoHE.png" alt="Huerto de Edén" class="footer-logo">
+        <div class="footer-divider"></div>
+        <span class="biblical-credit">Iconografía: Salmo 45:9 • Catedral de Smolensk (1676)</span>
+      </div>
+      <div class="slide-counter">
+        <span class="slide-counter-cur">01</span>
+        <span class="slide-counter-sep">/</span>
+        <span class="slide-counter-tot">12</span>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =====================================================================
+       PÁGINA 02: TRANSICIÓN («SPONSUS SPONSAE NUNTIARI IUBET...»)
+       ===================================================================== -->
+  <section class="print-page">
+    <div class="bg-pattern"></div>
+    <div class="page-body">
+      <div class="statement-layout">
+        <div class="statement-ornament">❦</div>
+        <div class="statement-text">«Sponsus sponsae nuntiari iubet...»</div>
+        <div class="statement-translation">«El novio ordena decir a la novia...»</div>
+      </div>
+    </div>
+    <footer class="page-footer">
+      <div class="footer-left">
+        <img src="logoHE.png" alt="Huerto de Edén" class="footer-logo">
+        <div class="footer-divider"></div>
+        <span class="biblical-credit">Mensaje: «Sponsus sponsae nuntiari iubet...» • «El novio ordena decir a la novia...»</span>
+      </div>
+      <div class="slide-counter">
+        <span class="slide-counter-cur">02</span>
+        <span class="slide-counter-sep">/</span>
+        <span class="slide-counter-tot">12</span>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =====================================================================
+       PÁGINA 03: CANTICUM CANTICORUM (ca. 1460)
+       ===================================================================== -->
+  <section class="print-page">
+    <div class="bg-pattern"></div>
+    <div class="page-body">
+      <div class="art-layout">
+        <div class="art-image-frame">
+          <img src="obra_slide3.jpg" alt="«El Novio coronando a la Esposa», ca. 1460 - Canticum Canticorum" class="art-image">
+        </div>
+        <div class="art-text-block">
+          <h2 class="art-main-title">«El Novio coronando a la Esposa»</h2>
+          <div class="art-hebrew-verse">«Veni de Libano sponsa mea, veni coronaberis»</div>
+          <p class="art-explanation">
+            Xilografía flamenca del <em>Canticum Canticorum</em> (ca. 1460). El Novio celestial ofrece la corona nupcial a la Esposa mientras proclama el llamado de amor de Cantares 4:8: “Ven del Líbano, esposa mía... ven y serás coronada”. En los filacterios dialogan los versos de Cantares 4:8 y 5:9.
+          </p>
+          <div class="art-figures">En la obra: Cristo el Esposo, la Novia coronada y las doncellas de Jerusalén</div>
+          <div class="art-meta-footer">
+            <span class="art-artist">Grabado xilográfico (Países Bajos)</span>
+            <span class="art-bullet">•</span>
+            <span class="art-work-title">Canticum Canticorum Blockbook</span>
+            <span class="art-bullet">•</span>
+            <span class="art-year">ca. 1460</span>
+            <span class="art-bullet">•</span>
+            <span class="music-credit-badge"><span class="music-note">♪</span> Un amor de lejos • Canción de trovador</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="page-footer">
+      <div class="footer-left">
+        <img src="logoHE.png" alt="Huerto de Edén" class="footer-logo">
+        <div class="footer-divider"></div>
+        <span class="biblical-credit">Obra &amp; Música de trovador: Cantares 4:8 • Canticum Canticorum (ca. 1460)</span>
+      </div>
+      <div class="slide-counter">
+        <span class="slide-counter-cur">03</span>
+        <span class="slide-counter-sep">/</span>
+        <span class="slide-counter-tot">12</span>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =====================================================================
+       PÁGINA 04: CANTAR DE LOS CANTARES - CAPÍTULO IV (PARTE I: ESTROFAS 1–6)
+       ===================================================================== -->
+  <section class="print-page">
+    <div class="bg-pattern"></div>
+    <div class="page-body">
+      <div class="poetry-header-banner">
+        <div class="poetry-header-left">
+          <div class="poetry-badge-row">
+            <span class="poetry-badge">CANTAR DE LOS CANTARES DE SALOMÓN</span>
+            <span class="poetry-part-tag">Parte I (Estrofas 1–6)</span>
+          </div>
+          <h2 class="poetry-main-title">Capítulo IV — Versión métrica en verso castellano</h2>
+        </div>
+        <div class="poetry-subtitle">Fray Luis de León</div>
+      </div>
+
+      <div class="poetry-split-body">
+        <div class="poetry-art-card">
+          <img src="cristo_el_esposo.jpg" alt="Cristo el Esposo - Icono bizantino" class="poetry-side-img">
+          <div class="poetry-caption">
+            <em>Cristo el Esposo (The Bridegroom)</em><br>Iconografía tradicional bizantina • Cantar de los Cantares 4
+          </div>
+        </div>
+
+        <div class="stanzas-grid-2">
+          <div class="stanza-col">
+            <span class="speaker-pill esposo">Esposo</span>
+            <div class="stanza-box">
+              <div class="stanza-header"><span class="stanza-num">1</span></div>
+              <p class="stanza-text">
+                ¡Oh, cómo eres de hermosa, dulce Amada!,<br>
+                y tus ojos son bellos y graciosos,<br>
+                como de una paloma muy preciada,<br>
+                entre esos tus copetes tan hermosos;<br>
+                tu cabello parece una manada<br>
+                de cabras y cabritos, que gozosos<br>
+                del monte Galaad vienen bajando,<br>
+                el pelo todo liso y relumbrando.
+              </p>
+            </div>
+            <div class="stanza-box">
+              <div class="stanza-header"><span class="stanza-num">2</span></div>
+              <p class="stanza-text">
+                Los tus hermosos dientes parecían<br>
+                un rebaño de ovejas muy preciado,<br>
+                las cuales de bañarse ya venían<br>
+                del río, el vellón viejo trasquilado,<br>
+                tan blancas, tan parejas, que se vían<br>
+                paciendo por el campo y por el prado;<br>
+                estéril entre todas no la había,<br>
+                dos cordericos cada cual traía.
+              </p>
+            </div>
+            <div class="stanza-box">
+              <div class="stanza-header"><span class="stanza-num">3</span></div>
+              <p class="stanza-text">
+                Hilo de carmesí bello y polido<br>
+                son los tus labios y tu hablar gracioso;<br>
+                tus mejillas a mí me han parecido<br>
+                un casco de granada muy hermoso;<br>
+                y aquese blanco cuello liso, erguido,<br>
+                castillo de David fuerte y vistoso;<br>
+                mil escudos en él están colgados,<br>
+                las armas de los fuertes, y estimados.
+              </p>
+            </div>
+          </div>
+
+          <div class="stanza-col">
+            <div class="stanza-box" style="margin-top: 22px;">
+              <div class="stanza-header"><span class="stanza-num">4</span></div>
+              <p class="stanza-text">
+                Los tus pechos dos blancos cabritillos<br>
+                parecen, y mellizos, que paciendo<br>
+                están entre violetas ternecillos,<br>
+                en medio de las flores revolviendo;<br>
+                mientras las sombras de aquellos cerrillos<br>
+                huyen, y el día viene reluciendo,<br>
+                voy al monte de mirra y al collado<br>
+                del incienso a cogerle muy preciado.
+              </p>
+            </div>
+            <div class="stanza-box">
+              <div class="stanza-header"><span class="stanza-num">5</span></div>
+              <p class="stanza-text">
+                Del todo eres hermosa, amiga mía,<br>
+                no tiene falta alguna tu hermosura;<br>
+                del Líbano desciende, mi alegría,<br>
+                vente ya para mí, y esa espesura<br>
+                de Hermón y Amana, que te tenía,<br>
+                déjala de seguir, que es muy oscura,<br>
+                donde se crían onzas y leones<br>
+                en las oscuras cuevas y rincones.
+              </p>
+            </div>
+            <div class="stanza-box">
+              <div class="stanza-header"><span class="stanza-num">6</span></div>
+              <p class="stanza-text">
+                Una morada bella ha edificado<br>
+                para sí Salomón, de extraña hechura;<br>
+                el su monte de Líbano ha cortado,<br>
+                para de cedro hacer la cobertura;<br>
+                de plata las columnas ha labrado,<br>
+                y el techo de oro fino, y la moldura,<br>
+                y el estrado de púrpura adornado<br>
+                y en medio de él mi amor está asentado.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="page-footer">
+      <div class="footer-left">
+        <img src="logoHE.png" alt="Huerto de Edén" class="footer-logo">
+        <div class="footer-divider"></div>
+        <span class="biblical-credit">Texto bíblico en verso: Cantar de los Cantares • Capítulo IV, Parte I (Fray Luis de León)</span>
+      </div>
+      <div class="slide-counter">
+        <span class="slide-counter-cur">04</span>
+        <span class="slide-counter-sep">/</span>
+        <span class="slide-counter-tot">12</span>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =====================================================================
+       PÁGINA 05: CANTAR DE LOS CANTARES - CAPÍTULO IV (PARTE II: ESTROFAS 7–12)
+       ===================================================================== -->
+  <section class="print-page">
+    <div class="bg-pattern"></div>
+    <div class="page-body">
+      <div class="poetry-header-banner">
+        <div class="poetry-header-left">
+          <div class="poetry-badge-row">
+            <span class="poetry-badge">CANTAR DE LOS CANTARES DE SALOMÓN</span>
+            <span class="poetry-part-tag">Parte II (Estrofas 7–12)</span>
+          </div>
+          <h2 class="poetry-main-title">Capítulo IV — El Huerto Cerrado y la Fuente Sellada</h2>
+        </div>
+        <div class="poetry-subtitle">Versión métrica en verso castellano • Fray Luis de León</div>
+      </div>
+
+      <div class="stanzas-grid-3" style="margin-top: 8px; flex: 1; align-items: start;">
+        <div class="stanza-col">
+          <span class="speaker-pill esposa">Esposa</span>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">7</span></div>
+            <p class="stanza-text">
+              Salid, hijas de Sión, a porfía,<br>
+              veréis a Salomón, Rey coronado,<br>
+              con la corona rica, que en el día<br>
+              de su gozo su madre le había dado.
+            </p>
+          </div>
+
+          <span class="speaker-pill esposo" style="margin-top: 8px;">Esposo</span>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">8</span></div>
+            <p class="stanza-text">
+              El corazón, Esposa, me has robado;<br>
+              en una sola vez que me miraste,<br>
+              con el sartal del cuello le has atado.<br>
+              ¡Cuán dulce es el amor con que me amaste!<br>
+              Más sabroso que el vino muy preciado.<br>
+              ¡Oh, cuán suave olor, que derramaste!<br>
+              Panal están tus labios destilando<br>
+              y en leche y miel tu lengua está nadando.
+            </p>
+          </div>
+        </div>
+
+        <div class="stanza-col">
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">9</span></div>
+            <p class="stanza-text">
+              Tu vestido y arreo tan preciado<br>
+              en su olor al del Líbano parece;<br>
+              eres un huerto hermoso y bien cerrado,<br>
+              que ninguno lo daña ni le empece:<br>
+              fuente sellada que el que la ha gustado,<br>
+              en el tu dulce amor luego enternece:<br>
+              jardín todo plantado de granados,<br>
+              de jazmín, mirra y nardos muy preciados,
+            </p>
+          </div>
+
+          <div class="stanza-box" style="margin-top: 8px;">
+            <div class="stanza-header"><span class="stanza-num">10</span></div>
+            <p class="stanza-text">
+              Donde también el azafrán se cría,<br>
+              canela y cinamomo muy gracioso,<br>
+              con toda suavidad de especería,<br>
+              linaloe con todo lo oloroso;<br>
+              fuente eres de los huertos, alma mía;<br>
+              pozo de vivas aguas muy sabroso,<br>
+              que del Líbano bajan sosegadas<br>
+              y en este pozo están muy reposadas.
+            </p>
+          </div>
+        </div>
+
+        <div class="stanza-col">
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">11</span></div>
+            <p class="stanza-text">
+              Sus, vuela, cierzo; ¡ea!, no parezcas<br>
+              por mi hermoso huerto, que he temor<br>
+              que con tu dura fuerza me le empezcas,<br>
+              llevándome mis frutos y mi olor;<br>
+              ven, ábrego, que ablandes y enternezcas<br>
+              mis plantas y derrames el su olor.
+            </p>
+          </div>
+
+          <span class="speaker-pill esposa" style="margin-top: 10px;">Esposa</span>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">12</span></div>
+            <p class="stanza-text">
+              Venga a mi huerto y coja sus manzanas,<br>
+              mi Amado, y comerá las muy tempranas.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="page-footer">
+      <div class="footer-left">
+        <img src="logoHE.png" alt="Huerto de Edén" class="footer-logo">
+        <div class="footer-divider"></div>
+        <span class="biblical-credit">Texto bíblico en verso: Cantar de los Cantares • Capítulo IV, Parte II (Fray Luis de León)</span>
+      </div>
+      <div class="slide-counter">
+        <span class="slide-counter-cur">05</span>
+        <span class="slide-counter-sep">/</span>
+        <span class="slide-counter-tot">12</span>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =====================================================================
+       PÁGINA 06: SAN JUAN DE LA CRUZ - CÁNTICO ESPIRITUAL (PARTE I: ESTROFAS 1–12)
+       ===================================================================== -->
+  <section class="print-page">
+    <div class="bg-pattern"></div>
+    <div class="page-body">
+      <div class="poetry-header-banner">
+        <div class="poetry-header-left">
+          <div class="poetry-badge-row">
+            <span class="poetry-badge">LÍRICA &amp; MÍSTICA DEL SIGLO DE ORO</span>
+            <span class="poetry-part-tag">Parte I (Estrofas 1–12)</span>
+          </div>
+          <h2 class="poetry-main-title">Cántico Espiritual entre el Alma y Cristo su Esposo</h2>
+        </div>
+        <div class="poetry-subtitle">San Juan de la Cruz (1542–1591) • Inspirado en el Cantar de los Cantares</div>
+      </div>
+
+      <div class="poetry-split-body">
+        <div class="poetry-art-card">
+          <img src="esposo_esposa.jpg" alt="El matrimonio del Cordero - Manuscrito iluminado del siglo XII" class="poetry-side-img" style="max-height: 4.35in;">
+          <div class="poetry-caption">
+            <em>El matrimonio del Cordero</em> • Iluminación románica (s. XII) • Apocalipsis 19:7–9
+          </div>
+          <div style="display:flex; flex-direction:column; gap:4px; align-items:center; margin-top:2px;">
+            <span class="music-credit-badge"><span class="music-note">♪</span> Foy porter • Guillaume de Machaut</span>
+            <span class="music-credit-badge"><span class="music-note">♪</span> Questa fanciull', Amor • F. Landini</span>
+          </div>
+        </div>
+
+        <div class="stanzas-grid-3">
+          <div class="stanza-col">
+            <span class="speaker-pill esposa">Esposa</span>
+            <div class="stanza-box">
+              <div class="stanza-header"><span class="stanza-num">1</span></div>
+              <p class="stanza-text compact">
+                ¿Adónde te escondiste,<br>
+                Amado, y me dexaste con gemido?<br>
+                Como el ciervo huiste,<br>
+                habiéndome herido;<br>
+                salí tras ti clamando, y ya eras ido.
+              </p>
+            </div>
+            <div class="stanza-box">
+              <div class="stanza-header"><span class="stanza-num">2</span></div>
+              <p class="stanza-text compact">
+                Pastores, los que fuerdes<br>
+                allá por las majadas al otero,<br>
+                si por ventura vierdes<br>
+                aquel que yo más quiero,<br>
+                decidle que adolezco, peno y muero.
+              </p>
+            </div>
+            <div class="stanza-box">
+              <div class="stanza-header"><span class="stanza-num">3</span></div>
+              <p class="stanza-text compact">
+                Buscando mis amores<br>
+                iré por esos montes y riberas,<br>
+                ni cogeré las flores<br>
+                ni temeré las fieras,<br>
+                y pasaré los fuertes y fronteras.
+              </p>
+            </div>
+            <div class="stanza-box">
+              <div class="stanza-header"><span class="stanza-num">4</span></div>
+              <p class="stanza-text compact">
+                ¡Oh bosques y espesuras,<br>
+                plantados por la mano del Amado,<br>
+                oh prado de verduras,<br>
+                de flores esmaltado,<br>
+                decid si por vosotros ha pasado!
+              </p>
+            </div>
+          </div>
+
+          <div class="stanza-col" style="padding-top: 20px;">
+            <div class="stanza-box">
+              <div class="stanza-header"><span class="stanza-num">5</span></div>
+              <p class="stanza-text compact">
+                Mil gracias derramando<br>
+                pasó por estos sotos con presura,<br>
+                y, yéndolos mirando,<br>
+                con sola su figura<br>
+                vestidos los dexó de su hermosura.
+              </p>
+            </div>
+            <div class="stanza-box">
+              <div class="stanza-header"><span class="stanza-num">6</span></div>
+              <p class="stanza-text compact">
+                ¡Ay, quién podrá sanarme!<br>
+                Acaba de entregarme ya de vero,<br>
+                no quieras enviarme<br>
+                de hoy más ya mensajero,<br>
+                que no saben decirme lo que quiero.
+              </p>
+            </div>
+            <div class="stanza-box">
+              <div class="stanza-header"><span class="stanza-num">7</span></div>
+              <p class="stanza-text compact">
+                Y todos cuantos vagan<br>
+                de ti me van mil gracias refiriendo,<br>
+                y todos más me llagan,<br>
+                y déxame muriendo<br>
+                un no sé qué que quedan balbuciendo.
+              </p>
+            </div>
+            <div class="stanza-box">
+              <div class="stanza-header"><span class="stanza-num">8</span></div>
+              <p class="stanza-text compact">
+                Mas, ¿cómo perseveras,<br>
+                oh, vida, no viviendo donde vives,<br>
+                y haciendo porque mueras<br>
+                las flechas que recibes<br>
+                de lo que del Amado en ti concibes?
+              </p>
+            </div>
+          </div>
+
+          <div class="stanza-col" style="padding-top: 20px;">
+            <div class="stanza-box">
+              <div class="stanza-header"><span class="stanza-num">9</span></div>
+              <p class="stanza-text compact">
+                ¿Por qué, pues, has llagado<br>
+                a aqueste corazón, no lo sanaste?<br>
+                Y pues me lo has robado,<br>
+                ¿por qué así lo dexaste<br>
+                y no tomas el robo que robaste?
+              </p>
+            </div>
+            <div class="stanza-box">
+              <div class="stanza-header"><span class="stanza-num">10</span></div>
+              <p class="stanza-text compact">
+                Apaga mis enojos,<br>
+                pues que ninguno basta a desacellos,<br>
+                y véante mis ojos,<br>
+                pues eres lumbre dellos<br>
+                y solo para ti quiero tenellos.
+              </p>
+            </div>
+            <div class="stanza-box">
+              <div class="stanza-header"><span class="stanza-num">11</span></div>
+              <p class="stanza-text compact">
+                Descubre su presencia<br>
+                y máteme tu vista y hermosura;<br>
+                mira que la dolencia<br>
+                de amor, que no se cura<br>
+                sino con la presencia y la figura.
+              </p>
+            </div>
+            <div class="stanza-box">
+              <div class="stanza-header"><span class="stanza-num">12</span></div>
+              <p class="stanza-text compact">
+                ¡Oh cristalina fuente,<br>
+                si en esos tus semblantes plateados<br>
+                formases de repente<br>
+                los ojos deseados<br>
+                que tengo en mis entrañas dibujados!<br>
+                <em>¡Apártalos, Amado, que voy de vuelo!</em>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="page-footer">
+      <div class="footer-left">
+        <img src="logoHE.png" alt="Huerto de Edén" class="footer-logo">
+        <div class="footer-divider"></div>
+        <span class="biblical-credit">Poesía mística: San Juan de la Cruz • Cántico Espiritual, Parte I (Estrofas 1–12)</span>
+      </div>
+      <div class="slide-counter">
+        <span class="slide-counter-cur">06</span>
+        <span class="slide-counter-sep">/</span>
+        <span class="slide-counter-tot">12</span>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =====================================================================
+       PÁGINA 07: SAN JUAN DE LA CRUZ - CÁNTICO ESPIRITUAL (PARTE II: ESTROFAS 13–26)
+       ===================================================================== -->
+  <section class="print-page">
+    <div class="bg-pattern"></div>
+    <div class="page-body">
+      <div class="poetry-header-banner">
+        <div class="poetry-header-left">
+          <div class="poetry-badge-row">
+            <span class="poetry-badge">LÍRICA &amp; MÍSTICA DEL SIGLO DE ORO</span>
+            <span class="poetry-part-tag">Parte II (Estrofas 13–26)</span>
+          </div>
+          <h2 class="poetry-main-title">Cántico Espiritual — El Encuentro y el Huerto Deseado</h2>
+        </div>
+        <div class="poetry-subtitle">San Juan de la Cruz (1542–1591)</div>
+      </div>
+
+      <div class="stanzas-grid-4">
+        <div class="stanza-col">
+          <span class="speaker-pill esposo">Esposo</span>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">13</span></div>
+            <p class="stanza-text compact">
+              Vuélvete, paloma,<br>
+              que el ciervo vulnerado<br>
+              por el otero asoma,<br>
+              el aire de tu vuelo, y fresco toma.
+            </p>
+          </div>
+          <span class="speaker-pill esposa">Esposa</span>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">14</span></div>
+            <p class="stanza-text compact">
+              Mi Amado, las montañas,<br>
+              los valles solitarios rumorosos,<br>
+              la noche sosegada,<br>
+              en par de los levantes de la aurora,<br>
+              la música callada,<br>
+              la soledad sonora,<br>
+              la cena, que recrea y enamora.
+            </p>
+          </div>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">15</span></div>
+            <p class="stanza-text compact">
+              Cazadnos las raposas,<br>
+              que está ya florecida nuestra viña,<br>
+              en tanto que de rosas<br>
+              hacemos una piña,<br>
+              y no parezca nadie en la montiña.
+            </p>
+          </div>
+        </div>
+
+        <div class="stanza-col">
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">16</span></div>
+            <p class="stanza-text compact">
+              Detente, Cierzo muerto;<br>
+              ven, austro, que recuerdas los amores;<br>
+              aspira por mi huerto<br>
+              y corran tus olores<br>
+              y pacerá el Amado entre las flores.
+            </p>
+          </div>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">17</span></div>
+            <p class="stanza-text compact">
+              ¡Oh ninfas de Judea!,<br>
+              en tanto que en las flores y rosales<br>
+              el ámbar perfumea,<br>
+              morad en los arrabales,<br>
+              y no queráis tocar nuestros umbrales.
+            </p>
+          </div>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">18</span></div>
+            <p class="stanza-text compact">
+              Escóndete, Carillo,<br>
+              y mira con tu haz a las montañas,<br>
+              y no quieras decillo;<br>
+              mas mira las compañas<br>
+              de la que va per ínsulas extrañas.
+            </p>
+          </div>
+          <span class="speaker-pill esposo">Esposo</span>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">19</span></div>
+            <p class="stanza-text compact">
+              A las aves ligeras,<br>
+              leones, ciervos, gamos saltadores,<br>
+              montes, valles, riberas,<br>
+              aguas, aires, ardores,<br>
+              y miedos en las noches veladores,
+            </p>
+          </div>
+        </div>
+
+        <div class="stanza-col">
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">20</span></div>
+            <p class="stanza-text compact">
+              por las amenas liras<br>
+              y cantos de sirena os conjuro,<br>
+              que cesen vuestras iras,<br>
+              y no toquéis al muro,<br>
+              porque la Esposa duerma más segura.
+            </p>
+          </div>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">21</span></div>
+            <p class="stanza-text compact">
+              Entrándose ha la esposa<br>
+              en el ameno huerto deseado,<br>
+              y a su sabor reposa,<br>
+              el cuello reclinado<br>
+              sobre los dulces brazos del Amado.
+            </p>
+          </div>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">22</span></div>
+            <p class="stanza-text compact">
+              Debajo del manzano,<br>
+              allí conmigo fuiste desposada,<br>
+              allí te di la mano,<br>
+              y fuiste reparada<br>
+              donde tu madre fuera violada.
+            </p>
+          </div>
+          <span class="speaker-pill esposa">Esposa</span>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">23</span></div>
+            <p class="stanza-text compact">
+              Nuestro lecho florido,<br>
+              de cuevas de leones enlazado,<br>
+              en púrpura teñido,<br>
+              de paz edificado,<br>
+              de mil escudos de oro coronado.
+            </p>
+          </div>
+        </div>
+
+        <div class="stanza-col">
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">24</span></div>
+            <p class="stanza-text compact">
+              A zaga de tu huella<br>
+              los jóvenes discurren el camino,<br>
+              al toque de centella,<br>
+              al adobado vino,<br>
+              emisiones de bálsamo divino.
+            </p>
+          </div>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">25</span></div>
+            <p class="stanza-text compact">
+              En la interior bodega<br>
+              de mi Amado bebí, y cuando salía<br>
+              por toda aquesta vega<br>
+              ya cosa no sabía<br>
+              y el ganado perdí que antes seguía.
+            </p>
+          </div>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">26</span></div>
+            <p class="stanza-text compact">
+              Allí me dio su pecho,<br>
+              allí me enseñó ciencia muy sabrosa,<br>
+              y yo le di de hecho<br>
+              a mí, sin dejar cosa,<br>
+              allí le prometí de ser su esposa.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="page-footer">
+      <div class="footer-left">
+        <img src="logoHE.png" alt="Huerto de Edén" class="footer-logo">
+        <div class="footer-divider"></div>
+        <span class="biblical-credit">Poesía mística: San Juan de la Cruz • Cántico Espiritual, Parte II (Estrofas 13–26)</span>
+      </div>
+      <div class="slide-counter">
+        <span class="slide-counter-cur">07</span>
+        <span class="slide-counter-sep">/</span>
+        <span class="slide-counter-tot">12</span>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =====================================================================
+       PÁGINA 08: SAN JUAN DE LA CRUZ - CÁNTICO ESPIRITUAL (PARTE III: ESTROFAS 27–39)
+       ===================================================================== -->
+  <section class="print-page">
+    <div class="bg-pattern"></div>
+    <div class="page-body">
+      <div class="poetry-header-banner">
+        <div class="poetry-header-left">
+          <div class="poetry-badge-row">
+            <span class="poetry-badge">LÍRICA &amp; MÍSTICA DEL SIGLO DE ORO</span>
+            <span class="poetry-part-tag">Parte III (Estrofas 27–39)</span>
+          </div>
+          <h2 class="poetry-main-title">Cántico Espiritual — Unión de Amor y Plenitud</h2>
+        </div>
+        <div class="poetry-subtitle">San Juan de la Cruz (1542–1591)</div>
+      </div>
+
+      <div class="stanzas-grid-4">
+        <div class="stanza-col">
+          <span class="speaker-pill esposa">Esposa</span>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">27</span></div>
+            <p class="stanza-text compact">
+              Mi alma se ha empleado<br>
+              y todo mi caudal en su servicio.<br>
+              Ya no guardo ganado<br>
+              ni ya tengo otro oficio;<br>
+              que ya sólo en amar es mi exercicio.
+            </p>
+          </div>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">28</span></div>
+            <p class="stanza-text compact">
+              Pues ya si en el exido<br>
+              de hoy más no fuere vista ni hallada,<br>
+              diréis que me he perdido,<br>
+              que andando enamorada<br>
+              me hice perdidiza, y fui ganada.
+            </p>
+          </div>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">29</span></div>
+            <p class="stanza-text compact">
+              De flores y esmeraldas,<br>
+              en las frescas mañanas escogidas,<br>
+              haremos las guirnaldas,<br>
+              en tu amor florecidas<br>
+              y en un cabello mío entretejidas.
+            </p>
+          </div>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">30</span></div>
+            <p class="stanza-text compact">
+              En un solo cabello,<br>
+              que en mi cuello volar consideraste,<br>
+              mirástele en mi cuello<br>
+              y en él preso quedaste,<br>
+              y en uno de mis ojos te llagaste.
+            </p>
+          </div>
+        </div>
+
+        <div class="stanza-col">
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">31</span></div>
+            <p class="stanza-text compact">
+              Cuando tú me mirabas,<br>
+              su gracia en mí tus ojos imprimían,<br>
+              por eso me adamabas<br>
+              y en eso merecían<br>
+              los míos adorar lo que en ti vían.
+            </p>
+          </div>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">32</span></div>
+            <p class="stanza-text compact">
+              No quieras despreciarme,<br>
+              que si color moreno en mí hallaste,<br>
+              ya bien puedes mirarme<br>
+              después que me miraste,<br>
+              que gracia y hermosura en mí dexaste.
+            </p>
+          </div>
+          <span class="speaker-pill esposo">Esposo</span>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">33</span></div>
+            <p class="stanza-text compact">
+              La blanca palomica<br>
+              al arca con el ramo se ha tornado,<br>
+              y ya la tortolica<br>
+              al socio deseado<br>
+              en las riberas verdes ha hallado.
+            </p>
+          </div>
+        </div>
+
+        <div class="stanza-col">
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">34</span></div>
+            <p class="stanza-text compact">
+              En soledad vivía,<br>
+              y en soledad ha puesto ya su nido,<br>
+              y en soledad la guía<br>
+              a solas su querido,<br>
+              también en soledad de amor herido.
+            </p>
+          </div>
+          <span class="speaker-pill esposa">Esposa</span>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">35</span></div>
+            <p class="stanza-text compact">
+              Gocémonos, Amado,<br>
+              y vámonos a ver en su hermosura<br>
+              al monte y al collado<br>
+              do mana el agua pura;<br>
+              entremos más adentro en la espesura.
+            </p>
+          </div>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">36</span></div>
+            <p class="stanza-text compact">
+              Y luego, a las subidas<br>
+              cavernas de las piedras nos iremos,<br>
+              que están bien escondidas,<br>
+              y allí nos entraremos<br>
+              y el mosto de granadas gustaremos.
+            </p>
+          </div>
+        </div>
+
+        <div class="stanza-col">
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">37</span></div>
+            <p class="stanza-text compact">
+              Allí me mostrarías<br>
+              aquello que mi alma pretendía,<br>
+              y luego me darías<br>
+              allí tú, vida mía,<br>
+              aquello que me diste el otro día.
+            </p>
+          </div>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">38</span></div>
+            <p class="stanza-text compact">
+              El aspirar del aire,<br>
+              el canto de la dulce Filomena,<br>
+              el soto y su donaire,<br>
+              en la noche serena,<br>
+              con llama que consume y no da pena.
+            </p>
+          </div>
+          <div class="stanza-box">
+            <div class="stanza-header"><span class="stanza-num">39</span></div>
+            <p class="stanza-text compact">
+              Que nadie lo miraba,<br>
+              Aminadab tampoco parecía,<br>
+              y el cerco sosegaba,<br>
+              y la caballería,<br>
+              a vista de las aguas descendía.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="page-footer">
+      <div class="footer-left">
+        <img src="logoHE.png" alt="Huerto de Edén" class="footer-logo">
+        <div class="footer-divider"></div>
+        <span class="biblical-credit">Poesía mística: San Juan de la Cruz • Cántico Espiritual, Parte III (Estrofas 27–39)</span>
+      </div>
+      <div class="slide-counter">
+        <span class="slide-counter-cur">08</span>
+        <span class="slide-counter-sep">/</span>
+        <span class="slide-counter-tot">12</span>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =====================================================================
+       PÁGINA 09: EL DIVINO ESPOSO EN EL HUERTO (1811)
+       ===================================================================== -->
+  <section class="print-page">
+    <div class="bg-pattern"></div>
+    <div class="page-body">
+      <div class="art-layout">
+        <div class="art-image-frame">
+          <img src="obra_slide5.jpg" alt="«El Divino Esposo», 1811 - Andrés López" class="art-image">
+        </div>
+        <div class="art-text-block">
+          <h2 class="art-main-title">«El Divino Esposo en el Huerto»</h2>
+          <div class="art-hebrew-verse">«Ego dormio, et Cor meum vigilat» (Cantares 5:2)</div>
+          <p class="art-explanation">
+            Pintura virreinal de Andrés López (1811) inspirada en el Cantar de los Cantares. El Pastor enamorado reposa en un huerto de lirios mientras vela por su Esposa: “Yo dormía, pero mi corazón velaba”. Acompañado de una glosa mística en verso sobre el corazón herido por amor.
+          </p>
+          <div class="art-figures">En el cuadro: El Divino Esposo, la ovejita herida por amor y el coro celestial de ángeles</div>
+          <div class="art-meta-footer">
+            <span class="art-artist">Andrés López</span>
+            <span class="art-bullet">•</span>
+            <span class="art-work-title">El Divino Esposo (México)</span>
+            <span class="art-bullet">•</span>
+            <span class="art-year">1811</span>
+            <span class="art-bullet">•</span>
+            <span class="music-credit-badge"><span class="music-note">♪</span> Canción de mayo • Canto de trovador</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="page-footer">
+      <div class="footer-left">
+        <img src="logoHE.png" alt="Huerto de Edén" class="footer-logo">
+        <div class="footer-divider"></div>
+        <span class="biblical-credit">Obra &amp; Canto de trovador: Cantares 5:2 • El Divino Esposo (1811)</span>
+      </div>
+      <div class="slide-counter">
+        <span class="slide-counter-cur">09</span>
+        <span class="slide-counter-sep">/</span>
+        <span class="slide-counter-tot">12</span>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =====================================================================
+       PÁGINA 10: CANTAR DE LOS CANTARES 5:2–5:6 (HEBREO, FONÉTICA Y ESPAÑOL)
+       ===================================================================== -->
+  <section class="print-page">
+    <div class="bg-pattern"></div>
+    <div class="page-body">
+      <div class="poetry-header-banner">
+        <div class="poetry-header-left">
+          <div class="poetry-badge-row">
+            <span class="poetry-badge">LECTURA BÍBLICA HEBREO – ESPAÑOL</span>
+            <span class="poetry-part-tag">Parte I (Versículos 5:2 – 5:6)</span>
+          </div>
+          <h2 class="poetry-main-title">Cantar de los Cantares 5 — El Llamado del Amado</h2>
+        </div>
+        <div class="poetry-subtitle">Nósuaj Ashkenaz • Texto Masorético, Fonética y Traducción</div>
+      </div>
+
+      <div class="verses-list">
+        <div class="verse-card">
+          <div class="verse-num-badge">5:2</div>
+          <div class="verse-hebrew-col">
+            <div class="verse-hebrew">אֲנִי יְשֵׁנָה וְלִבִּי עֵר קוֹל דּוֹדִי דוֹפֵק פִּתְחִי־לִי אֲחֹתִי רַעְיָתִי יוֹנָתִי תַמָּתִי שֶׁרֹּאשִׁי נִמְלָא־טָל קְוֻּצּוֹתַי רְסִיסֵי לָיְלָה׃</div>
+            <div class="verse-phonetic">Aní yeshenáh ve-libí er; kol dodí dofék: «Pítji-li ajotí, ra'yatí, yonatí, tamatí, she-roshí nimlá-tal, kevutsotái resiséi láylah».</div>
+          </div>
+          <div class="verse-spanish">Yo dormía, pero mi corazón velaba. ¡La voz de mi amado que llama!: «Ábreme, hermana mía, compañera mía, paloma mía, perfecta mía; porque mi cabeza está llena de rocío, mis cabellos de las gotas de la noche».</div>
+        </div>
+
+        <div class="verse-card">
+          <div class="verse-num-badge">5:3</div>
+          <div class="verse-hebrew-col">
+            <div class="verse-hebrew">פָּשַׁטְתִּי אֶת־כֻּתָּנְתִּי אֵיכָכָה אֶלְבָּשֶׁנָּה רָחַצְתִּי אֶת־רַגְלַי אֵיכָכָה אֲטַנְּפֵם׃</div>
+            <div class="verse-phonetic">Pashátti et-kuttantí, eikhákhah elbashénnah? Rajátsti et-ragláy, eikhákhah atanefém?</div>
+          </div>
+          <div class="verse-spanish">«Me he despojado de mi túnica; ¿cómo la he de vestir? He lavado mis pies; ¿cómo los he de ensuciar?».</div>
+        </div>
+
+        <div class="verse-card">
+          <div class="verse-num-badge">5:4</div>
+          <div class="verse-hebrew-col">
+            <div class="verse-hebrew">דּוֹדִי שָׁלַח יָדוֹ מִן־הַחֹר וּמֵעַי הָמוּ עָלָיו׃</div>
+            <div class="verse-phonetic">Dodí shaláj yadó min-hajor, u-me'ái hamú alav.</div>
+          </div>
+          <div class="verse-spanish">Mi amado metió su mano por la abertura, y mis entrañas se conmovieron por él.</div>
+        </div>
+
+        <div class="verse-card">
+          <div class="verse-num-badge">5:5</div>
+          <div class="verse-hebrew-col">
+            <div class="verse-hebrew">קַמְתִּי אֲנִי לִפְתֹּחַ לְדוֹדִי וְיָדַי נָטְפוּ־מוֹר וְאֶצְבְּעֹתַי מוֹר עֹבֵר עַל כַּפּוֹת הַמַּנְעוּל׃</div>
+            <div class="verse-phonetic">Kámti aní liftóaj le-dodí, ve-yadái natfú-mor, ve-etsbe'otái mor ovér al kapót ha-man'ul.</div>
+          </div>
+          <div class="verse-spanish">Yo me levanté para abrir a mi amado, y mis manos gotearon mirra, y mis dedos mirra líquida sobre las manijas del cerrojo.</div>
+        </div>
+
+        <div class="verse-card">
+          <div class="verse-num-badge">5:6</div>
+          <div class="verse-hebrew-col">
+            <div class="verse-hebrew">פָּתַחְתִּי אֲנִי לְדוֹדִי וְדוֹדִי חָמַק עָבָר נַפְשִׁי יָצְאָה בְדַבְּרוֹ בִּקַּשְׁתִּיהוּ וְלֹא מְצָאתִיהוּ קְרָאתִיו וְלֹא עָנָנִי׃</div>
+            <div class="verse-phonetic">Patájti aní le-dodí, ve-dodí jamák avár; nafshí yats'áh ve-daberó, bikashtíhu ve-lo metsatíhu, keratív ve-lo anáni.</div>
+          </div>
+          <div class="verse-spanish">Abrí yo a mi amado, pero mi amado se había ido, ya había pasado; mi alma desfalleció cuando habló. Lo busqué y no lo hallé; lo llamé y no me respondió.</div>
+        </div>
+      </div>
+    </div>
+    <footer class="page-footer">
+      <div class="footer-left">
+        <img src="logoHE.png" alt="Huerto de Edén" class="footer-logo">
+        <div class="footer-divider"></div>
+        <span class="biblical-credit">Lectura bíblica: Rabino Weisblum • Nósuaj Ashkenaz (Cantares 5:2–6)</span>
+      </div>
+      <div class="slide-counter">
+        <span class="slide-counter-cur">10</span>
+        <span class="slide-counter-sep">/</span>
+        <span class="slide-counter-tot">12</span>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =====================================================================
+       PÁGINA 11: CANTAR DE LOS CANTARES 5:7–5:11 (HEBREO, FONÉTICA Y ESPAÑOL)
+       ===================================================================== -->
+  <section class="print-page">
+    <div class="bg-pattern"></div>
+    <div class="page-body">
+      <div class="poetry-header-banner">
+        <div class="poetry-header-left">
+          <div class="poetry-badge-row">
+            <span class="poetry-badge">LECTURA BÍBLICA HEBREO – ESPAÑOL</span>
+            <span class="poetry-part-tag">Parte II (Versículos 5:7 – 5:11)</span>
+          </div>
+          <h2 class="poetry-main-title">Cantar de los Cantares 5 — Conjuro a las Hijas de Jerusalén</h2>
+        </div>
+        <div class="poetry-subtitle">Nósuaj Ashkenaz • Texto Masorético, Fonética y Traducción</div>
+      </div>
+
+      <div class="verses-list">
+        <div class="verse-card">
+          <div class="verse-num-badge">5:7</div>
+          <div class="verse-hebrew-col">
+            <div class="verse-hebrew">מְצָאֻנִי הַשֹּׁמְרִים הַסֹּבְבִים בָּעִיר הִכּוּנִי פְצָעוּנִי נָשְׂאוּ אֶת־רְדִידִי מֵעָלַי שֹׁמְרֵי הַחֹמוֹת׃</div>
+            <div class="verse-phonetic">Metsa'úni ha-shomerím ha-sovevím ba'ír, hikúni, fetsa'úni; nas'ú et-redidí me'alái shomeréi ha-jomot.</div>
+          </div>
+          <div class="verse-spanish">Me hallaron los guardas que rondan la ciudad; me golpearon, me hirieron; me despojaron de mi velo los guardas de los muros.</div>
+        </div>
+
+        <div class="verse-card">
+          <div class="verse-num-badge">5:8</div>
+          <div class="verse-hebrew-col">
+            <div class="verse-hebrew">הִשְׁבַּעְתִּי אֶתְכֶם בְּנוֹת יְרוּשָׁלָ‍ִם אִם־תִּמְצְאוּ אֶת־דּוֹדִי מַה־תַּגִּידוּ לוֹ שֶׁחוֹלַת אַהֲבָה אָנִי׃</div>
+            <div class="verse-phonetic">Hishbá'ti etjém, benot Yerushaláyim, im-timtse'ú et-dodí, mah-taguídu lo? She-jolat ahaváh áni.</div>
+          </div>
+          <div class="verse-spanish">Yo les conjuro, oh hijas de Jerusalén, que si hallan a mi amado, le digan que desfallezco de amor.</div>
+        </div>
+
+        <div class="verse-card">
+          <div class="verse-num-badge">5:9</div>
+          <div class="verse-hebrew-col">
+            <div class="verse-hebrew">מַה־דּוֹדֵךְ מִדּוֹד הַיָּפָה בַּנָּשִׁים מַה־דּוֹדֵךְ מִדּוֹד שֶׁכָּכָה הִשְׁבַּעְתָּנוּ׃</div>
+            <div class="verse-phonetic">Mah-dodéj mi-dod, hayafáh banashím? Mah-dodéj mi-dod, she-kájah hishba'tánu?</div>
+          </div>
+          <div class="verse-spanish">«¿Qué es tu amado más que otro amado, oh la más hermosa entre las mujeres? ¿Qué es tu amado más que otro amado, para que así nos conjures?».</div>
+        </div>
+
+        <div class="verse-card">
+          <div class="verse-num-badge">5:10</div>
+          <div class="verse-hebrew-col">
+            <div class="verse-hebrew">דּוֹדִי צַח וְאָדוֹם דָּגוּל מֵרְבָבָה׃</div>
+            <div class="verse-phonetic">Dodí tsaj ve-adóm, dagúl me-revaváh.</div>
+          </div>
+          <div class="verse-spanish">«Mi amado es resplandeciente y sonrosado, distinguido entre diez mil.</div>
+        </div>
+
+        <div class="verse-card">
+          <div class="verse-num-badge">5:11</div>
+          <div class="verse-hebrew-col">
+            <div class="verse-hebrew">רֹאשׁוֹ כֶּתֶם פָּז קְוּצּוֹתָיו תַּלְתַּלִּים שְׁחֹרוֹת כָּעוֹרֵב׃</div>
+            <div class="verse-phonetic">Roshó kétem paz; kevutsotáv taltalím, shejorót ka-orév.</div>
+          </div>
+          <div class="verse-spanish">Su cabeza es como el oro más puro; sus cabellos crespos, negros como el cuervo.</div>
+        </div>
+      </div>
+    </div>
+    <footer class="page-footer">
+      <div class="footer-left">
+        <img src="logoHE.png" alt="Huerto de Edén" class="footer-logo">
+        <div class="footer-divider"></div>
+        <span class="biblical-credit">Lectura bíblica: Rabino Weisblum • Nósuaj Ashkenaz (Cantares 5:7–11)</span>
+      </div>
+      <div class="slide-counter">
+        <span class="slide-counter-cur">11</span>
+        <span class="slide-counter-sep">/</span>
+        <span class="slide-counter-tot">12</span>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =====================================================================
+       PÁGINA 12: CANTAR DE LOS CANTARES 5:12–5:16 (HEBREO, FONÉTICA Y ESPAÑOL)
+       ===================================================================== -->
+  <section class="print-page">
+    <div class="bg-pattern"></div>
+    <div class="page-body">
+      <div class="poetry-header-banner">
+        <div class="poetry-header-left">
+          <div class="poetry-badge-row">
+            <span class="poetry-badge">LECTURA BÍBLICA HEBREO – ESPAÑOL</span>
+            <span class="poetry-part-tag">Parte III (Versículos 5:12 – 5:16)</span>
+          </div>
+          <h2 class="poetry-main-title">Cantar de los Cantares 5 — «¡Tal es mi amado, tal es mi amigo!»</h2>
+        </div>
+        <div class="poetry-subtitle">Nósuaj Ashkenaz • Texto Masorético, Fonética y Traducción</div>
+      </div>
+
+      <div class="verses-list">
+        <div class="verse-card">
+          <div class="verse-num-badge">5:12</div>
+          <div class="verse-hebrew-col">
+            <div class="verse-hebrew">עֵינָיו כְּיוֹנִים עַל־אֲפִיקֵי מָיִם רֹחֲצוֹת בֶּחָלָב יֹשְׁבוֹת עַל־מִלֵּאת׃</div>
+            <div class="verse-phonetic">Eináv ke-yoním al-afikéi máyim, rojatsót ba-jaláv, yoshevót al-millét.</div>
+          </div>
+          <div class="verse-spanish">Sus ojos son como palomas junto a corrientes de aguas, lavados con leche, colocados a la perfección.</div>
+        </div>
+
+        <div class="verse-card">
+          <div class="verse-num-badge">5:13</div>
+          <div class="verse-hebrew-col">
+            <div class="verse-hebrew">לְחָיָו כַּעֲרוּגַת הַבֹּשֶׂם מִגְדְּלוֹת מֶרְקָחִים שִׂפְתוֹתָיו שׁוֹשַׁנִּים נֹטְפוֹת מוֹר עֹבֵר׃</div>
+            <div class="verse-phonetic">Lejayáv ka-arugát ha-bósem, migdelót merkajím; siftotáv shoshaním, notfót mor ovér.</div>
+          </div>
+          <div class="verse-spanish">Sus mejillas, como una era de especias, como torres de hierbas aromáticas; sus labios, como lirios que destilan mirra líquida.</div>
+        </div>
+
+        <div class="verse-card">
+          <div class="verse-num-badge">5:14</div>
+          <div class="verse-hebrew-col">
+            <div class="verse-hebrew">יָדָיו גְּלִילֵי זָהָב מְמֻלָּאִים בַּתַּרְשִׁישׁ מֵעָיו עֶשֶׁת שֵׁן מְעֻלֶּפֶת סַפִּירִים׃</div>
+            <div class="verse-phonetic">Yadáiv geliléi zaháv, memula'ím ba-tarshísh; me'áv éshet shen, me'uléfet sapirím.</div>
+          </div>
+          <div class="verse-spanish">Sus manos, como cilindros de oro engastados de piedras preciosas; su cuerpo, como marfil pulido recubierto de zafiros.</div>
+        </div>
+
+        <div class="verse-card">
+          <div class="verse-num-badge">5:15</div>
+          <div class="verse-hebrew-col">
+            <div class="verse-hebrew">שׁוֹקָיו עַמּוּדֵי שֵׁשׁ מְיֻסָּדִים עַל־אַדְנֵי־פָז מַרְאֵהוּ כַּלְּבָנוֹן בָּחוּר כָּאֲרָזִים׃</div>
+            <div class="verse-phonetic">Shokáv amudéi shesh, meyusadím al-adnéi-faz; mar'éhu ka-Levanón, bajúr ka-arazím.</div>
+          </div>
+          <div class="verse-spanish">Sus piernas, columnas de mármol asentadas sobre basas de oro puro; su porte, como el Líbano, imponente como los cedros.</div>
+        </div>
+
+        <div class="verse-card">
+          <div class="verse-num-badge">5:16</div>
+          <div class="verse-hebrew-col">
+            <div class="verse-hebrew">חִכּוֹ מַמְתַקִּים וְכֻלּוֹ מַחֲמַדִּים זֶה דוֹדִי וְזֶה רֵעִי בְּנוֹת יְרוּשָׁלָ‍ִם׃</div>
+            <div class="verse-phonetic">Jikó mamtakím, ve-juló majamadím. Zeh dodí ve-zeh re'í, benot Yerushaláyim».</div>
+          </div>
+          <div class="verse-spanish">Su paladar, dulcísimo, y todo él codiciable. ¡Tal es mi amado, tal es mi amigo, oh hijas de Jerusalén!».</div>
+        </div>
+      </div>
+    </div>
+    <footer class="page-footer">
+      <div class="footer-left">
+        <img src="logoHE.png" alt="Huerto de Edén" class="footer-logo">
+        <div class="footer-divider"></div>
+        <span class="biblical-credit">Lectura bíblica: Rabino Weisblum • Nósuaj Ashkenaz (Cantares 5:12–16)</span>
+      </div>
+      <div class="slide-counter">
+        <span class="slide-counter-cur">12</span>
+        <span class="slide-counter-sep">/</span>
+        <span class="slide-counter-tot">12</span>
+      </div>
+    </footer>
+  </section>
+
+</body>
+</html>
